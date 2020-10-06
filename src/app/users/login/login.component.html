@@ -1,0 +1,35 @@
+<div class="login-wrapper">
+  <a class="login-side" href="as">
+      <div class="login-link">
+          <img src="" alt="">
+          <div class="side-info">
+              <h2>Massive</h2>
+              <span>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </span>
+          </div>
+      </div>
+  </a>
+  <div class="login">
+      <div class="login-box">
+          <div class="mb-4">
+              <h1>Bem-vindo a Brandone!</h1>
+              <span>Informe as credenciais para efetuar o log-in.</span>
+          </div>
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)" >
+              <div class="login-input">
+                  <label for="email">E-mail ou CPF/CNPJ</label>
+                  <input type="email" id="username" formControlName="username" class="form-control" [ngClass]="{'is-invalid': getError('username') }">
+                  <small class="text-danger" *ngIf="getError('username')">{{getError('username')}}</small>
+              </div>
+              <div class="login-input">
+                  <label for="senha">Senha</label>
+                  <input type="password" id="password" formControlName="password" class="form-control" [ngClass]="{'is-invalid': getError('password') }">
+                  <small class="text-danger" *ngIf="getError('password')">{{getError('password')}}</small>
+              </div>
+              <div  class="d-block text-right">
+                  <a href="#" class="forgot-password">Esqueceu a senha?</a>
+              </div>
+              <button class="btn btn-login my-3" type="submit">Entre</button>
+          </form>
+      </div>
+  </div>
+</div>
