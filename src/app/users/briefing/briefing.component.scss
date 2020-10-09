@@ -1,0 +1,130 @@
+.max-size {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+.select-wrapper {
+  position: relative;
+  &.show {
+    .category-list {
+      display: block;
+      z-index: 2;
+    }
+  }
+  .select-category {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    min-height: 52px;
+    border-radius: 0px;
+    border-color: #333;
+    position: relative;
+    cursor: pointer;
+    span {
+      font-size: 16px;
+      font-weight: 400;
+      color: #666666;
+    }
+    .material-icons {
+      position: absolute;
+      right: 15px;
+      font-size: 21px;
+    }
+    .category-tag {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      flex-direction: row;
+      background-color: #333;
+      padding: 4px 8px;
+      border-radius: 5rem;
+      margin: 4px;
+      span {
+        font-size: 15px;
+        color: #fff;
+        font-weight: 600;
+      }
+    }
+
+  }
+  .category-list {
+    position: absolute;
+    transform: translate(0, -2px);
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border-top: none;
+    border-left: 1px solid #333;
+    border-right: 1px solid #333;
+    border-bottom: 1px solid #333;
+    display: none;
+    .category-ul {
+      padding: 10px;
+      margin: 0;
+      list-style: none;
+      max-height: 150px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      li {
+        cursor: pointer;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        align-content: center;
+        padding: 5px;
+        height: 40px;
+        position: relative;
+        padding-left: 30px;
+        &:before {
+          font-family: 'Material Icons';
+          content: 'check_box_outline_blank';
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          top:0;
+          display: block;
+          display: flex;
+          align-items: center;
+          margin: auto 0;
+          font-size: 21px;
+        }
+        &.active {
+          &:before {
+            content: 'check_box';
+          }
+        }
+      }
+    }
+  }
+  .select-overlay {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    background-color: transparent;
+    visibility: hidden;
+    opacity: 0;
+    &.show {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+

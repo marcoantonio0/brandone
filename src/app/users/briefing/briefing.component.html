@@ -1,0 +1,121 @@
+<nav>
+  <div class="container py-4">
+      <div class="timeline">
+          <div class="timeline-progress">
+              <div class="ts-bar" style="width: 50%;"></div>
+          </div>
+          <div class="ls-steps">
+              <div class="ls-step finish">
+                  <div class="fill">
+                      <span class="material-icons">
+                          done
+                      </span>
+                  </div>
+                  <div class="ls-text">
+                      Cadastro
+                  </div>
+              </div>
+              <div class="ls-step active">
+                  <div class="fill">
+                      <span class="material-icons">
+                          description
+                      </span>
+                  </div>
+                  <div class="ls-text">
+                      Briefing
+                  </div>
+              </div>
+              <div class="ls-step last">
+                  <div class="fill ">
+                      <span class="material-icons">
+                          done
+                      </span>
+                  </div>
+                  <div class="ls-text">
+                      Obrigado!
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</nav>
+<div class="step-container container">
+
+      <div class="row">
+          <div class="col-12 col-xl-6">
+              <div class="mb-4">
+                  <h1>
+                      Briefing
+                  </h1>
+                  <span>
+                      Preencha as informações abaixo para prosseguir.
+                  </span>
+              </div>
+              <form [formGroup]="briefingForm" (ngSubmit)="onSubmit(briefingForm.value)" >
+              <div class="form-group">
+                <label for="">Categoria</label>
+                <div class="select-wrapper" >
+                  <div class="select-category" (click)="activeDrop($event.currentTarget)">
+                    <span *ngIf="selectedCategory.length <= 0">Selecione as categorias</span>
+                    <div *ngIf="selectedCategory.length > 0" class="d-flex flex-row flex-wrap">
+                      <div class="category-tag"  *ngFor="let category of selectedCategory">
+                        <span >{{category.description}}</span>
+                      </div>
+                    </div>
+                    <span class="material-icons">
+                      expand_more
+                    </span>
+                  </div>
+                  <div class="category-list">
+                    <ul class="category-ul" >
+                      <li  *ngFor="let category of categories" (click)="addCategory(category)" [ngClass]="{'active': isSelected(category.id)}">
+                        {{category.description}}
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="select-overlay" (click)="hiddenCat()"></div>
+                </div>
+                <!-- <small>
+                  Selecione categorias para o seu projeto.
+                </small> -->
+              </div>
+              <div class="form-group">
+                  <label for="">Título do projeto</label>
+                  <input type="text" class="form-control" formControlName="title" placeholder="Ex.: Logotipo para minha empresa"  [ngClass]="{'is-invalid': getError('title') }">
+                  <small class="text-danger d-block" *ngIf="getError('title')">{{getError('title')}}</small>
+                  <small>
+                      Dê um nome para o seu projeto.
+                  </small>
+              </div>
+              <div class="form-group">
+                  <label for="">Nome da empresa</label>
+                  <input type="text" class="form-control" formControlName="company"  [ngClass]="{'is-invalid': getError('company') }">
+                   <small class="text-danger d-block" *ngIf="getError('company')">{{getError('company')}}</small>
+              </div>
+              <div class="form-group">
+                  <label for="">Prazo desejável</label>
+                  <input type="date" class="form-control" placeholder="00/00/0000" formControlName="deadline"  [ngClass]="{'is-invalid': getError('deadline') }">
+                  <small class="text-danger d-block" *ngIf="getError('deadline')">{{getError('deadline')}}</small>
+                  <small>
+                      Escolha um prazo para entrega do seu projeto. <b>Aviso: Dependendo do prazo irá interferir no valor final do projeto.</b>
+                  </small>
+              </div>
+              <div class="form-group">
+                  <label for="">Nos dê mais informações sobre o projeto</label>
+                  <div class="position-relative">
+                    <textarea name="" id="" cols="30" rows="5" class="form-control" formControlName="description" placeholder="Digite aqui..."  [ngClass]="{'is-invalid': getError('description') }"></textarea>
+                    <small class="max-size">{{briefingForm.value.description.length}}/350</small>
+                  </div>
+                  <small class="text-danger d-block" *ngIf="getError('description')">{{getError('description')}}</small>
+              </div>
+              </form>
+              <button class="btn btn-continue" type="submit">
+                  Continuar
+              </button>
+          </div>
+          <div class="col-12 col-xl-6">
+
+          </div>
+      </div>
+
+</div>
