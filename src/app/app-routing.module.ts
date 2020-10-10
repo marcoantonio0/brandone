@@ -1,3 +1,4 @@
+import { ContentComponent } from './content/content.component';
 import { ErrorComponent } from './error/error.component';
 import { IndexComponent } from './index/index.component';
 import { AppComponent } from './app.component';
@@ -10,12 +11,13 @@ const routes: Routes = [
   {
     path: '',
     canActivate: [AuthGuard],
-    component: AppComponent
-  },
-  {
-    path: 'index',
-    canActivate: [AuthGuard],
-    component: IndexComponent
+    component: ContentComponent,
+    children: [
+      {
+        path: '',
+        component: IndexComponent
+      }
+    ]
   },
   {
     path: 'user',

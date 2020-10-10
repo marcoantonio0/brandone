@@ -69,17 +69,22 @@
               </div>
               <div class="form-group">
                   <label for="">CPF/CNPJ</label>
-                  <input type="tel" class="form-control" id="cpfcnpj" formControlName="cpfcnpj" [ngClass]="{'is-invalid': getError('cpfcnpj') }">
+                  <input type="tel" class="form-control" id="cpfcnpj" formControlName="cpfcnpj" [ngClass]="{'is-invalid': getError('cpfcnpj') }" mask="000.000.000-00||00.000.000/0000-00">
                   <small class="text-danger" *ngIf="getError('cpfcnpj')">{{getError('cpfcnpj')}}</small>
               </div>
+              <div class="form-group" *ngIf="registerForm.value.cpfcnpj.length > 11">
+                <label for="">Razão Social</label>
+                <input type="tel" class="form-control" id="razao_social" formControlName="razao_social" [ngClass]="{'is-invalid': getError('razao_social') }">
+                <small class="text-danger" *ngIf="getError('razao_social')">{{getError('razao_social')}}</small>
+            </div>
               <div class="form-group">
                 <label for="">Nascimento</label>
-                <input type="tel" class="form-control" id="birthday" formControlName="birthday" [ngClass]="{'is-invalid': getError('birthday') }">
+                <input type="date" class="form-control" id="birthday" formControlName="birthday" [ngClass]="{'is-invalid': getError('birthday') }">
                 <small class="text-danger" *ngIf="getError('birthday')">{{getError('birthday')}}</small>
               </div>
               <div class="form-group">
                   <label for="">Telefone/Celular</label>
-                  <input type="tel" class="form-control" id="phone" formControlName="phone" [ngClass]="{'is-invalid': getError('phone') }">
+                  <input type="tel" class="form-control" id="phone" formControlName="phone" [ngClass]="{'is-invalid': getError('phone') }"  mask="(00) 0000-0000||(00) 0 0000-0000">
                   <small class="text-danger" *ngIf="getError('phone')">{{getError('phone')}}</small>
               </div>
               <button class="btn btn-continue" type="submit">

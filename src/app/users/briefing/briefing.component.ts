@@ -1,5 +1,9 @@
+import { Router } from '@angular/router';
+import { OrderService } from './../../_services/order.service';
+import { CategoryService } from './../../_services/category.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-briefing',
@@ -8,44 +12,52 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class BriefingComponent implements OnInit {
   public briefingForm = new FormGroup({
-    title: new FormControl('', [Validators.required, Validators.maxLength(32)]),
+    title: new FormControl('', [Validators.required, Validators.maxLength(128)]),
     company: new FormControl('', [Validators.required,  Validators.maxLength(32)]),
     deadline: new FormControl('', [Validators.required]),
-    description: new FormControl('', [Validators.required,  Validators.maxLength(350)])
+    description: new FormControl('', [Validators.required, Validators.minLength(20), Validators.maxLength(350)]),
+    category: new FormControl('', Validators.required)
   });
+  images = [];
   selectedCategory: any[] = [];
-  categories = [
-    {
-      description: 'Logotipo',
-      id: '1'
-    },
-    {
-      description: 'Branding',
-      id: '2'
-    },
-    {
-      description: 'Banner',
-      id: '3'
-    },
-    {
-      description: 'Mídia Social',
-      id: '4'
-    },
-  ];
-  constructor() { }
+  categories: any;
+  constructor(
+    private sCategory: CategoryService,
+    private sOrder: OrderService,
+    private route: Router
+  ) {
+    this.sCategory.getAll().subscribe(r => {
+      this.categories = r;
+    });
+  }
 
   ngOnInit(): void {
   }
 
-  onSubmit(value){
+  getCategories(){
+    const categories = [];
+    for (const category of this.categories) {
+      categories.push(category._id);
+    };
+    return categories;
+  }
 
+  onSubmit(value){
+    value.category = this.getCategories();
+    console.log(value);
+    this.sOrder.create(value).subscribe(r => {
+      alert(r.message);
+      this.route.navigate(['/user/obrigado']);
+    }, e => {
+      alert(e);
+    });
   }
 
   addCategory(category){
     if (this.selectedCategory.length <= 0){
       this.selectedCategory.push(category);
     } else {
-      const exist = this.selectedCategory.findIndex(x => x.id === category.id);
+      const exist = this.selectedCategory.findIndex(x => x._id === category._id);
       if (exist > -1) {
         this.selectedCategory.splice(exist, 1);
       } else {
@@ -55,7 +67,7 @@ export class BriefingComponent implements OnInit {
   }
 
   isSelected(id){
-    const exist = this.selectedCategory.findIndex(x => x.id === id);
+    const exist = this.selectedCategory.findIndex(x => x._id === id);
     if(exist > -1) return true;
     else return false;
   }
@@ -89,6 +101,26 @@ export class BriefingComponent implements OnInit {
         return `Maximo ${form.errors.maxlength.requiredLength} caracteres.`;
       }
     }
+  }
+
+  fileChange(files){
+    for (let i = 0; i < files.length; i++) {
+      const render = new FileReader();
+      const file = files.item(i);
+      render.onload = () => {
+        this.images.push({
+          name: file.name,
+          url: render.result
+        });
+      };
+      if (file) {
+        render.readAsDataURL(file);
+      }
+    }
+  }
+
+  removeImage(index){
+    this.images.splice(index, 1);
   }
 
 }

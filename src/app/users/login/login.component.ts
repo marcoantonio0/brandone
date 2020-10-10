@@ -1,7 +1,7 @@
-import { UserService } from './../../_services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,25 +9,35 @@ import { AuthenticationService } from 'src/app/_services/authentication.service'
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  public loginForm = new FormGroup({
+  loginForm = new FormGroup({
     username: new FormControl('', Validators.required),
     password: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
   constructor(
-    private sAuth: AuthenticationService
-  ) { }
+    private sAuth: AuthenticationService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    if(this.sAuth.currentUser){
+      this.router.navigate(['/']);
+    }
+  }
 
   ngOnInit(): void {
   }
 
-  onSubmit(value){
-   if (this.checkErros(value) === true){
+  Submit(value){
+    if (this.checkErros(value) === true){
       this.sAuth.login(value.username, value.password).subscribe(
         r => {
-        console.log(r);
         alert('Logado com sucesso!');
+        if (this.route.snapshot.queryParams.returnUrl){
+          this.router.navigate(['/'+this.route.snapshot.queryParams.returnUrl]);
+        } else {
+          this.router.navigate(['/']);
+        }
       }, e => {
-        alert('Erro ao logar!');
+        alert(e);
       });
    } else {
       alert(this.checkErros(value));

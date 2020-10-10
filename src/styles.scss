@@ -69,7 +69,6 @@
   color: #fff;
   .wrapper {
       padding: 1.3rem;
-      height: 150vh;
       .content-title {
           font-size: 2rem;
           font-weight: 400;
@@ -418,3 +417,6 @@
       text-transform: uppercase;
   }
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

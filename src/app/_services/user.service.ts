@@ -15,4 +15,8 @@ export class UserService {
     register(data){
       return this.http.post(`${api.url}/user`, data);
     }
+
+    getMenu(id){
+      return this.http.get(`${api.url}/user/menu/${id}`);
+    }
 }

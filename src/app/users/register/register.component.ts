@@ -1,6 +1,8 @@
+import { Router } from '@angular/router';
 import { UserService } from './../../_services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthenticationService } from 'src/app/_services/authentication.service';
 
 @Component({
   selector: 'app-register',
@@ -14,10 +16,13 @@ export class RegisterComponent implements OnInit {
     password: new FormControl('', Validators.required),
     cpfcnpj: new FormControl('', Validators.required),
     phone: new FormControl('', Validators.required),
-    birthday: new FormControl('', Validators.required)
+    birthday: new FormControl('', Validators.required),
+    razao_social: new FormControl('')
   })
   constructor(
-    private sUser: UserService
+    private sUser: UserService,
+    private route: Router,
+    private sAuth: AuthenticationService
   ) { }
 
   ngOnInit(): void {
@@ -66,7 +71,10 @@ export class RegisterComponent implements OnInit {
   onSubmit(value){
     if (this.checkErros(value) === true){
       this.sUser.register(value).subscribe(r => {
-        alert('Registrado com sucesso!')
+        alert('Registrado com sucesso!');
+        this.sAuth.login(value.email, value.password).subscribe(r => {
+          this.route.navigate(['/user/briefing']);
+        })
       }, e => {
         alert(e);
       })

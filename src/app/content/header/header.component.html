@@ -1,0 +1,72 @@
+<header>
+  <nav class="nav">
+      <div class="d-flex flex-row aling-items-center w-100 justify-content-end p-2">
+          <button class="user-profile"  [matMenuTriggerFor]="menu">
+              <picture>
+                  <img src="https://static.vakinha.com.br/uploads/vakinha/image/425429/ff.gif?ims=700x410" alt="">
+              </picture>
+              <span>
+                  {{getNome()}}
+              </span>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <mat-icon>person</mat-icon>
+              <span>Minha conta</span>
+            </button>
+            <button mat-menu-item (click)="logout()">
+              <mat-icon>exit_to_app</mat-icon>
+              <span>Sair?</span>
+            </button>
+          </mat-menu>
+      </div>
+  </nav>
+  <nav class="sidebar">
+      <div class="logo-brand">
+          <a href="#">
+              <img src="" alt="">
+          </a>
+      </div>
+
+      <!-- <div class="accordion" id="accordionExample">
+          <div class="card menu">
+              <button class="menu-item btn" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Dashboard
+              </button>
+
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+              <div class="card-body p-0">
+                  <div class="accordion" id="accordionExample">
+                      <div class="card">
+                          <button class="menu-item btn" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          Collapsible Group Item #1
+                          </button>
+
+
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+
+                        </div>
+                      </div>
+                    </div>
+              </div>
+            </div>
+          </div>
+      </div> -->
+
+      <mat-accordion>
+        <mat-expansion-panel hideToggle *ngFor="let menu of menus">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ menu.description }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <mat-list role="list">
+            <mat-list-item role="listitem"  *ngFor="let menu of menu.submenu" [routerLink]="[menu.link]"> {{ menu.description }}</mat-list-item>
+          </mat-list>
+
+        </mat-expansion-panel>
+      </mat-accordion>
+  </nav>
+</header>

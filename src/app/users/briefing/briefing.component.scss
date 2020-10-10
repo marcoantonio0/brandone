@@ -127,4 +127,62 @@
   }
 }
 
+.image-list {
+  padding: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  li, label {
+    margin: 5px;
+    cursor: pointer;
+    height: 65px;
+    width: 65px;
+    border: 1px dashed rgb(180, 180, 180);
+    background-color: rgb(236, 236, 236);
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    input {
+      display: none;
+    }
+    span {
+      font-size: 26px;
+      color: #666;
+    }
+    img {
+      height: 65px;
+      width: 65px;
+    }
+  }
+  .image {
+    position: relative;
+    &:hover {
+     &:before{
+       visibility: visible;
+     }
+    }
+    &:before {
+      visibility: hidden;
+      content: 'x';
+      background-color:#3333335e;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: red;
+      font-size: 28px;
+    }
+  }
+}
+
 

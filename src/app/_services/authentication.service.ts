@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { api } from '../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -10,7 +11,7 @@ export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<any>;
     public currentUser: Observable<any>;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private route: Router) {
         this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
     }
@@ -33,5 +34,6 @@ export class AuthenticationService {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
+        this.route.navigate(['/user/login']);
     }
 }

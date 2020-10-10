@@ -68,7 +68,7 @@
                   </div>
                   <div class="category-list">
                     <ul class="category-ul" >
-                      <li  *ngFor="let category of categories" (click)="addCategory(category)" [ngClass]="{'active': isSelected(category.id)}">
+                      <li  *ngFor="let category of categories" (click)="addCategory(category)" [ngClass]="{'active': isSelected(category._id)}">
                         {{category.description}}
                       </li>
                     </ul>
@@ -108,10 +108,26 @@
                   </div>
                   <small class="text-danger d-block" *ngIf="getError('description')">{{getError('description')}}</small>
               </div>
-              </form>
+              <div class="form-group">
+                <label for="">Imagens</label>
+                <ul class="image-list">
+                  <li *ngFor="let image of images; let i = index" (click)="removeImage(i)" class="image">
+                    <img [src]="image.url" alt="">
+                  </li>
+                  <label for="file">
+                    <span>+</span>
+                    <input type="file" id="file" name="file" multiple (change)="fileChange($event.target.files)">
+                  </label>
+                </ul>
+                <small>
+                  Envie referencias para auxiliar os criadores a executar o projeto.
+                </small>
+              </div>
               <button class="btn btn-continue" type="submit">
-                  Continuar
-              </button>
+                Continuar
+            </button>
+              </form>
+
           </div>
           <div class="col-12 col-xl-6">
 
