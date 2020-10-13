@@ -1,11 +1,17 @@
 <h1 class="content-title">Usuários</h1>
 
             <div class="card">
-                <div class="card-header">
+                <div class="card-header d-flex flex-row justify-content-between" [formGroup]="filters">
                     <mat-form-field appearance="outline">
                       <mat-label>Pesquise</mat-label>
-                      <input matInput placeholder="Nome, CPF/CNPJ, E-mail..." [formControl]="search">
+                      <input matInput placeholder="Nome, CPF/CNPJ, E-mail..." formControlName="search" >
                       <mat-icon matSuffix>search</mat-icon>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Permissões</mat-label>
+                        <mat-select formControlName="roles" multiple>
+                          <mat-option *ngFor="let role of allRoles" [value]="role">{{role}}</mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </div>
                 <div class="card-body p-0">
@@ -19,7 +25,7 @@
                             <th></th>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let user of users">
+                            <tr  *ngFor="let user of users">
                                 <td></td>
                                 <td>{{user.name}}</td>
                                 <td>{{user.cpfcnpj | mask: '000.000.000-00||00.000.000/0000-00' }}</td>
@@ -36,6 +42,11 @@
                                         </button>
                                     </div>
                                 </td>
+                            </tr>
+                            <tr>
+                              <td align="center" colspan="6" *ngIf="users.length <= 0">
+                                Nada foi encontrado!
+                              </td>
                             </tr>
                         </tbody>
                     </table>

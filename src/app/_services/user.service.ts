@@ -30,8 +30,12 @@ export class UserService {
         });
       }
 
-    getAll() {
-        return this.http.get<UserModel[]>(`${api.url}/user`, { headers: this.headers });
+    getAll(search?: string, roles?: string) {
+      let url = '';
+      if(search || roles){
+         url = `?${search ? 'search=' + search : ''}${search ? '&' : ''}${roles ? 'roles=' + roles : ''}`;
+      }
+      return this.http.get<any>(`${api.url}/user${url}`, { headers: this.headers });
     }
 
     getById(id) {
