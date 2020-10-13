@@ -16,7 +16,11 @@ const routes: Routes = [
       {
         path: '',
         component: IndexComponent
-      }
+      },
+      {
+        path: 'admin',
+        loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+      },
     ]
   },
   {

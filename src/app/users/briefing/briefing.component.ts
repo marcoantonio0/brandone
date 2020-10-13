@@ -46,7 +46,7 @@ export class BriefingComponent implements OnInit {
     value.category = this.getCategories();
     console.log(value);
     this.sOrder.create(value).subscribe(r => {
-      alert(r.message);
+      alert(r);
       this.route.navigate(['/user/obrigado']);
     }, e => {
       alert(e);

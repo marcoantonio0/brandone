@@ -1,0 +1,43 @@
+<h1 class="content-title">Usuários</h1>
+
+            <div class="card">
+                <div class="card-header">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Pesquise</mat-label>
+                      <input matInput placeholder="Nome, CPF/CNPJ, E-mail..." [formControl]="search">
+                      <mat-icon matSuffix>search</mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table w-100">
+                        <thead>
+                            <th></th>
+                            <th>Nome</th>
+                            <th>CPF/CNPJ</th>
+                            <th>Cargos</th>
+                            <th>E-mail</th>
+                            <th></th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of users">
+                                <td></td>
+                                <td>{{user.name}}</td>
+                                <td>{{user.cpfcnpj | mask: '000.000.000-00||00.000.000/0000-00' }}</td>
+                                <td>
+                                  <mat-chip-list >
+                                    <mat-chip *ngFor="let roles of user.roles"> {{ roles }}</mat-chip>
+                                  </mat-chip-list>
+                                </td>
+                                <td>{{user.email}}</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="act-button blue"  [routerLink]="['/admin/users/'+user._id]">
+                                            <mat-icon class="mat-18">visibility</mat-icon>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>

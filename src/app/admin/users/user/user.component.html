@@ -1,0 +1,71 @@
+<h1 class="content-title">Usuario: {{userName}}</h1>
+
+  <div class="card">
+      <div class="card-body p-0">
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab label="Informações">
+            <div class="card-body">
+              <div class="row mx-0">
+                <div class="col-6 pl-0">
+                  <h2>Informações</h2>
+                  <form [formGroup]="userForm">
+                    <p>
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Nome</mat-label>
+                        <input matInput placeholder="Placeholder" formControlName="name">
+                      </mat-form-field>
+                    </p>
+                    <p>
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>CPF/CNPJ</mat-label>
+                        <input matInput placeholder="Placeholder" formControlName="cpfcnpj">
+                      </mat-form-field>
+                    </p>
+                    <p>
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>E-mail</mat-label>
+                        <input matInput placeholder="Placeholder" formControlName="email">
+                      </mat-form-field>
+                    </p>
+                    <p>
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Permissões</mat-label>
+                        <mat-select formControlName="roles" multiple >
+                          <mat-option *ngFor="let role of allRoles" [value]="role" >{{role}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </p>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab label="Acessos">
+            <div class="card-body">
+              <h2>Acessos</h2>
+
+              <mat-accordion multi>
+                <mat-expansion-panel  *ngFor="let menu of menus" [expanded]="hasPermission(menu._id)" [disabled]="!hasPermission(menu._id)">
+                  <mat-expansion-panel-header >
+                    <mat-panel-title class="d-flex align-items-center justify-content-between">
+                      <div class="d-flex align-items-center">
+                        <mat-icon class="mr-3">{{menu.icon}}</mat-icon>
+                        {{menu.description}}
+                      </div>
+                      <mat-slide-toggle [checked]="hasPermission(menu._id)" (click)="setMenu(menu._id)"></mat-slide-toggle>
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div *ngFor="let submenu of menu.submenu" class="d-flex flex-row align-items-center w-100 justify-content-between">
+                    {{submenu.description}}
+                      <mat-slide-toggle [checked]="hasPermission(submenu._id, 'sub')"  (click)="setSubMenu(submenu._id)"></mat-slide-toggle>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+
+
+      </div>
+  </div>

@@ -55,15 +55,16 @@
       </div> -->
 
       <mat-accordion>
-        <mat-expansion-panel hideToggle *ngFor="let menu of menus">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
+        <mat-expansion-panel hideToggle *ngFor="let menu of menus" >
+          <mat-expansion-panel-header >
+            <mat-panel-title matRipple>
+              <mat-icon class="mat-18" *ngIf="menu.icon">{{menu.icon}}</mat-icon>
               {{ menu.description }}
             </mat-panel-title>
           </mat-expansion-panel-header>
 
           <mat-list role="list">
-            <mat-list-item role="listitem"  *ngFor="let menu of menu.submenu" [routerLink]="[menu.link]"> {{ menu.description }}</mat-list-item>
+            <mat-list-item role="listitem"  matRipple *ngFor="let menu of menu.submenu" [routerLink]="[menu.link]"> {{ menu.description }}</mat-list-item>
           </mat-list>
 
         </mat-expansion-panel>

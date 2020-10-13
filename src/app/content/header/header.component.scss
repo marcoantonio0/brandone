@@ -1,0 +1,67 @@
+.mat-expansion-panel {
+  background-color: #242526;
+  color: #fff !important;
+  border-bottom: 1px solid #3A3C3D;
+}
+
+.mat-expansion-panel:not([class*=mat-elevation-z]) {
+  box-shadow: none;
+}
+
+.mat-expansion-panel-header-title {
+  color: #fff;
+}
+
+.mat-expansion-panel-header{
+  &.mat-expanded:before {
+    transform: rotateZ(180deg);
+  }
+  &:before {
+    font-family: 'Material Icons';
+    content: 'expand_more';
+    position: absolute;
+    font-size: 21px;
+    right: 15px;
+    color: rgb(116, 116, 116);
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    display: flex;
+    align-items: center;
+    transition: all ease-in-out 200ms;
+  }
+}
+
+
+
+.mat-expansion-panel-header-title, .mat-expansion-panel-header-description {
+  height: 64px;
+  margin-right: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  mat-icon {
+    margin-right: .95rem;
+    color: #666;
+  }
+}
+
+.mat-list-item {
+  cursor: pointer;
+  outline: none !important;
+
+}
+
+.mat-expansion-panel-body{
+  padding: 0px 0px 10px 10px !important;
+}
+
+.mat-expansion-panel-header {
+  height: auto !important;
+  padding: 0 !important;
+  margin-right: 0 !important;
+}
+
+.mat-list-base .mat-list-item {
+  color: #fff;
+}
