@@ -9,12 +9,6 @@
                     <mat-icon matSuffix>search</mat-icon>
                   </mat-form-field>
                   </form>
-                  <!-- <mat-form-field appearance="outline">
-                      <mat-label>Permissões</mat-label>
-                      <mat-select formControlName="roles" multiple>
-                        <mat-option *ngFor="let role of allRoles" [value]="role">{{role}}</mat-option>
-                      </mat-select>
-                  </mat-form-field> -->
                 </div>
                 <div class="card-body">
                   <div class="row">
@@ -25,7 +19,12 @@
                           <span style="font-size: 14px;">{{order.description}}</span>
                         </div>
                         <span class="status-float" [ngStyle]="{'background-color': this.getColorStatus(getLastStatus(order.status).idstatus)}">{{ getLastStatus(order.status).status }}</span>
-                        <span style="font-size: 12px;">Prazo: <span style="color: rgb(141, 141, 141);"> {{order.deadline | date:'dd/MM/yyyy'}}</span></span>
+                        <div class="d-flex flex-row align-items-center justify-content-between">
+                          <div class="prazo-tag">Prazo: {{order.deadline | date:'dd/MM/yyyy'}}</div>
+                          <div class="d-flex flex-row align-items-center flex-wrap">
+                            <span class="category-tag " *ngFor="let category of order.category">{{category.description}}</span>
+                          </div>
+                        </div>
                       </mat-card>
                     </div>
                   </div>

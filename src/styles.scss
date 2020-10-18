@@ -64,7 +64,6 @@
   background-color: #18191A;
   padding-left: 280px;
   padding-top: 60px;
-  height: 100%;
   z-index: 1;
   color: #fff;
   .wrapper {
@@ -371,6 +370,111 @@
   }
 }
 
+.timeline-order {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 45px 0px 10px;
+  font-size: 14px;
+  .timeline-progress {
+      width: 100%;
+      background-color: #484848;
+      overflow: hidden;
+      height: 4px;
+      display: block;
+      overflow: hidden;
+      border-radius: 5rem;
+      .ts-bar {
+          background-color: var(--green);
+          height: 100%;
+          display: block;
+      }
+  }
+  .order-steps {
+      display: flex;
+      width: 100%;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-top: -45px;
+      .order-step {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          text-decoration: none;
+          &.last {
+              .fill {
+                  height: 50px;
+                  width: 50px;
+                  background-color: #a1a1a1;
+                  color: #fff;
+                  border: #666;
+              }
+              .order-text {
+                  top: 55px;
+              }
+          }
+          &.active {
+              .fill {
+                  border-color: #333;
+                  color: #333;
+              }
+              .order-text {
+                  color: #333;
+                  font-weight: 600;
+              }
+          }
+          &.finish {
+              &.last {
+                  .fill {
+                      border-color: var(--green);
+                      background-color: var(--green);
+                      color: #fff;
+                  }
+                  .order-text {
+                      color: var(--green);
+                      font-weight: var(--green);
+                      font-weight: 600;
+                  }
+              }
+              .fill {
+                  border-color: var(--green);
+                  color: var(--green);
+              }
+              .order-text {
+                  color: var(--green);
+                  font-weight: var(--green);
+                  font-weight: 400;
+              }
+          }
+          .fill {
+              height: 35px;
+              width: 35px;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              color: #919191;
+          }
+          .order-text {
+              align-items: center;
+              justify-content: center;
+              display: flex;
+              flex-direction: column;
+              position: absolute;
+              top: 35px;
+              width: 95px;
+              font-size: 12px;
+              color: #696969;
+              top: 55px;
+              text-align: center;
+          }
+      }
+  }
+}
+
 .step-container {
   h1 {
       color: #000;
@@ -447,10 +551,13 @@
   }
 
 }
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700&display=swap');
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
+html, body { height: 100%; background-color: #18191A; }
+body { margin: 0; font-family: 'Roboto', sans-serif; }
+b {
+  font-weight: 500;
+}
 
 /**
 * Generated theme by Material Theme Generator

@@ -1,17 +1,141 @@
 <div class="d-flex flex-row align-items-center flex-wrap justify-content-between">
   <h1 class="content-title">Detalhes do projeto</h1>
   <div class="d-flex flex-column align-items-end">
-    <p class="mb-0"><b>ID do Projeto</b>: {{order._id}}</p>
+    <p class="mb-0"><b>ID do Projeto</b>: {{order.id}}</p>
     <p><b>Projeto iniciado em</b>: {{order.createdAt | date: 'dd/MM/yyyy'}}</p>
   </div>
 </div>
 
 <div class="card">
-  <div class="card-header d-flex flex-row justify-content-between" >
+  <!-- <div class="card-header d-flex flex-row justify-content-between" >
 
-  </div>
-  <div class="card-body">
-    asas
+  </div> -->
+  <div class="card-body p-0">
+    <div class="row m-0 p-3">
+      <div class="col-4">
+        a
+      </div>
+      <div class="col-8">
+        <div class="mb-2">
+          <div class="d-flex flex-row align-items-center justify-content-between mb-3">
+            <h2 class="mb-0">
+              {{order.title}}
+            </h2>
+            <span class="status-float ml-3">Prazo: {{order.deadline | date:'dd/MM/yyyy' }}</span>
+          </div>
+           <div class="mb-3">
+            <mat-chip-list
+            cdkDropList
+            cdkDropListOrientation="horizontal">
+            <mat-chip
+              cdkDrag
+              *ngFor="let category of order.category">
+              {{category.description}}
+            </mat-chip>
+          </mat-chip-list>
+           </div>
+          <span style="font-size: 18px;" class="mb-3 d-block">Descrição</span>
+          <p style="font-size: 14px;" class="mb-3">
+            {{order.description}}
+          </p>
+        </div>
+        <div class="mb-5">
+          <div class="timeline-order">
+            <div class="timeline-progress">
+                <div class="ts-bar" [ngStyle]="{'width': getSizeTimeline()+'%' }" ></div>
+            </div>
+
+            <div class="order-steps">
+                <div class="order-step" *ngFor="let st of status" [ngClass]="{'finish': st.active === true}">
+                    <div class="fill">
+                        <span class="material-icons">
+                            done
+                        </span>
+                    </div>
+                    <div class="order-text">
+                        {{st.description}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="p-3">
+      <div class="mb-2">
+        <h1 class="mb-0">Suporte</h1>
+        <small style="color: #6e6e6e">Converse com o lancer abaixo. Ajude-nós a entender melhor seu projeto.</small>
+      </div>
+      <div class="chat-container">
+        <div class="chat-wrapper">
+
+          <div class="chat-baloon-wrapper right">
+            <span class="chat-name">Nome</span>
+            <div class="chat-baloon">
+              <span class="chat-text">Texto aaaaaaaaaa</span>
+              <span class="chat-time">10/08/2020 18:12</span>
+            </div>
+          </div>
+
+          <div class="chat-baloon-wrapper left">
+            <span class="chat-name">Nome</span>
+            <div class="chat-baloon">
+              <span class="chat-text">Texto aaaaaaaaaa</span>
+              <span class="chat-time">10/08/2020 18:12</span>
+            </div>
+          </div>
+
+          <div class="chat-baloon-wrapper right">
+            <span class="chat-name">Nome</span>
+            <div class="chat-baloon">
+              <span class="chat-text">Texto aaaaaaaaaa</span>
+              <span class="chat-time">10/08/2020 18:12</span>
+            </div>
+          </div>
+
+          <div class="chat-baloon-wrapper left">
+            <span class="chat-name">Nome</span>
+            <div class="chat-baloon">
+              <span class="chat-text">Texto aaaaaaaaaa</span>
+              <span class="chat-time">10/08/2020 18:12</span>
+            </div>
+          </div>
+
+          <div class="chat-baloon-wrapper right">
+            <span class="chat-name">Nome</span>
+            <div class="chat-baloon">
+              <span class="chat-text">Texto aaaaaaaaaa</span>
+              <span class="chat-time">10/08/2020 18:12</span>
+            </div>
+          </div>
+
+          <div class="chat-baloon-wrapper left">
+            <span class="chat-name">Nome</span>
+            <div class="chat-baloon">
+              <span class="chat-text">Texto aaaaaaaaaa</span>
+              <span class="chat-time">10/08/2020 18:12</span>
+            </div>
+          </div>
+
+        </div>
+        <div class="chat-inputs">
+          <div class="chat-input">
+            <input type="text" placeholder="Digite aqui">
+            <div class="mx-2">
+              <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                <mat-icon>send</mat-icon>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="p-3">
+      <h1>Informações de pagamento</h1>
+    </div>
   </div>
 
 </div>
