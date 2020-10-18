@@ -1,0 +1,34 @@
+<h1 class="content-title">Meus Projetos</h1>
+
+            <div class="card">
+                <div class="card-header d-flex flex-row justify-content-between" >
+                  <form [formGroup]="filters">
+                     <mat-form-field appearance="outline">
+                    <mat-label>Pesquise</mat-label>
+                    <input matInput type="search" placeholder="Titulo do projeto" formControlName="search" >
+                    <mat-icon matSuffix>search</mat-icon>
+                  </mat-form-field>
+                  </form>
+                  <!-- <mat-form-field appearance="outline">
+                      <mat-label>Permissões</mat-label>
+                      <mat-select formControlName="roles" multiple>
+                        <mat-option *ngFor="let role of allRoles" [value]="role">{{role}}</mat-option>
+                      </mat-select>
+                  </mat-form-field> -->
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-6 p-0" *ngFor="let order of orders">
+                      <mat-card class="d-flex flex-column position-relative m-2" style="cursor: pointer;" [routerLink]="['/order/'+order._id]">
+                        <div class="mb-2">
+                          <h3 class="mb-0"><b>{{order.title}}</b></h3>
+                          <span style="font-size: 14px;">{{order.description}}</span>
+                        </div>
+                        <span class="status-float" [ngStyle]="{'background-color': this.getColorStatus(getLastStatus(order.status).idstatus)}">{{ getLastStatus(order.status).status }}</span>
+                        <span style="font-size: 12px;">Prazo: <span style="color: rgb(141, 141, 141);"> {{order.deadline | date:'dd/MM/yyyy'}}</span></span>
+                      </mat-card>
+                    </div>
+                  </div>
+                </div>
+
+            </div>

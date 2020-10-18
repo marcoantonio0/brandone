@@ -8,23 +8,35 @@
               <div class="row mx-0">
                 <div class="col-6 pl-0">
                   <h2>Informações</h2>
-                  <form [formGroup]="userForm">
+                  <form [formGroup]="userForm" (ngSubmit)="submit()">
                     <p>
                       <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Nome</mat-label>
-                        <input matInput placeholder="Placeholder" formControlName="name">
+                        <input matInput formControlName="name">
                       </mat-form-field>
                     </p>
                     <p>
                       <mat-form-field appearance="outline" class="w-100">
                         <mat-label>CPF/CNPJ</mat-label>
-                        <input matInput placeholder="Placeholder" formControlName="cpfcnpj">
+                        <input matInput formControlName="cpfcnpj"  mask="000.000.000-00||00.000.000/0000-00">
+                      </mat-form-field>
+                    </p>
+                    <p>
+                      <mat-form-field appearance="outline" class="w-100" *ngIf="this.userForm.value.cpfcnpj.length > 11">
+                        <mat-label>Razão Social</mat-label>
+                        <input matInput formControlName="razao_social">
+                      </mat-form-field>
+                    </p>
+                    <p>
+                      <mat-form-field appearance="outline" class="w-100" >
+                        <mat-label>Nascimento</mat-label>
+                        <input matInput type="date" value="1999-12-18" formControlName="birthday">
                       </mat-form-field>
                     </p>
                     <p>
                       <mat-form-field appearance="outline" class="w-100">
                         <mat-label>E-mail</mat-label>
-                        <input matInput placeholder="Placeholder" formControlName="email">
+                        <input matInput formControlName="email">
                       </mat-form-field>
                     </p>
                     <p>
@@ -35,7 +47,23 @@
                         </mat-select>
                       </mat-form-field>
                     </p>
+                  <div class="d-flex flex-row align-items-center">
+                    <button mat-flat-button class="mr-2" color="primary" type="submit" [disabled]="isLoading" >
+                      <div class="d-flex flex-row align-items-center">
+                        <mat-spinner  diameter="20" *ngIf="isLoading" class="mr-2"></mat-spinner>
+                        {{ isLoading ? 'Salvando' : 'Salvar' }}
+                      </div>
+                    </button>
+                    <button mat-stroked-button type="button"  class="d-flex flex-row align-items-center" (click)="back()">
+                      <mat-icon style="font-size: 12px; height: 12px; width: 12px;" >arrow_back_ios</mat-icon> Voltar
+                    </button>
+                  </div>
                   </form>
+                </div>
+                <div class="col-6">
+                  <h2>Logs</h2>
+                  <p><b>Criado em</b>: {{ userCreated | date: 'dd/mm/yyyy HH:mm'}}</p>
+                  <p><b>Ultima atualização</b>: {{ userUpdated | date: 'dd/mm/yyyy HH:mm' }}</p>
                 </div>
               </div>
             </div>

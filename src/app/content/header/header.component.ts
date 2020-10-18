@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
     private sAuth: AuthenticationService,
     private sUser: UserService
   ) {
-    this.sUser.getMenu(this.sAuth.currentUserValue.username).subscribe(r =>{
+    this.sUser.getMenu(this.sAuth.currentUserValue.id).subscribe(r =>{
       this.menus = r;
     })
   }

@@ -3,6 +3,7 @@ import { OrderService } from './../../_services/order.service';
 import { CategoryService } from './../../_services/category.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AuthenticationService } from 'src/app/_services/authentication.service';
 
 
 @Component({
@@ -12,6 +13,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class BriefingComponent implements OnInit {
   public briefingForm = new FormGroup({
+    user: new FormControl('', Validators.required),
     title: new FormControl('', [Validators.required, Validators.maxLength(128)]),
     company: new FormControl('', [Validators.required,  Validators.maxLength(32)]),
     deadline: new FormControl('', [Validators.required]),
@@ -24,14 +26,17 @@ export class BriefingComponent implements OnInit {
   constructor(
     private sCategory: CategoryService,
     private sOrder: OrderService,
-    private route: Router
+    private route: Router,
+    private sAuth: AuthenticationService
   ) {
+    this.briefingForm.get('user').setValue(this.sAuth.currentUserValue.id);
     this.sCategory.getAll().subscribe(r => {
       this.categories = r;
     });
   }
 
   ngOnInit(): void {
+
   }
 
   getCategories(){
@@ -44,7 +49,6 @@ export class BriefingComponent implements OnInit {
 
   onSubmit(value){
     value.category = this.getCategories();
-    console.log(value);
     this.sOrder.create(value).subscribe(r => {
       alert(r);
       this.route.navigate(['/user/obrigado']);

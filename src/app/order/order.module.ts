@@ -1,12 +1,11 @@
-import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
-import { AdminRoutingModule } from './admin-routing.module';
-import { AdminComponent } from './admin.component';
-import { UsersComponent } from './users/users.component';
-import { MatIconModule } from '@angular/material/icon';
-import { UserComponent } from './users/user/user.component';
+import { OrderRoutingModule } from './order-routing.module';
+import { OrderComponent } from './order.component';
+import {MatCardModule} from '@angular/material/card';
+import { OrderviewComponent } from './orderview/orderview.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatTabsModule} from '@angular/material/tabs';
@@ -21,27 +20,28 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 import {MatButtonModule} from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
-  declarations: [AdminComponent, UsersComponent, UserComponent],
+  declarations: [OrderComponent, OrderviewComponent],
   imports: [
     CommonModule,
-    AdminRoutingModule,
-    MatIconModule,
+    OrderRoutingModule,
+    MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule,
     MatTabsModule,
     MatExpansionModule,
     MatListModule,
     MatSlideToggleModule,
-    MatSelectModule,
     MatChipsModule,
-    NgxMaskModule.forRoot(),
+    MatAutocompleteModule,
+    MatSelectModule,
     NgxPaginationModule,
+    ReactiveFormsModule,
     MatButtonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatIconModule
   ]
 })
-export class AdminModule { }
+export class OrderModule { }

@@ -25,7 +25,7 @@
                             <th></th>
                         </thead>
                         <tbody>
-                            <tr  *ngFor="let user of users">
+                            <tr  *ngFor="let user of users | paginate: { itemsPerPage: 20, currentPage: p, totalItems: total }">
                                 <td></td>
                                 <td>{{user.name}}</td>
                                 <td>{{user.cpfcnpj | mask: '000.000.000-00||00.000.000/0000-00' }}</td>
@@ -51,4 +51,10 @@
                         </tbody>
                     </table>
                 </div>
+                <pagination-controls
+                      (pageChange)="pageChanged($event)"
+                      (pageBoundsCorrection)="pageChanged($event)"
+                      directionLinks="true"
+                      responsive="true">
+              </pagination-controls>
             </div>

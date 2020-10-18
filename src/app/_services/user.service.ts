@@ -16,6 +16,10 @@ export interface UserModel {
   _id: string;
   cpfcnpj: number;
   email: string;
+  razao_social: string;
+  birthday: Date;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -26,15 +30,16 @@ export class UserService {
       private sAuth: AuthenticationService
       ) {
         this.headers = new HttpHeaders({
-          Authorization: 'Bearer ' + this.sAuth.currentUserValue.access_token
+          Authorization: 'Bearer ' + this.sAuth.currentUserValue?.access_token
         });
       }
 
-    getAll(search?: string, roles?: string) {
+    getAll(search?: string, roles?: string, offset?: string) {
       let url = '';
-      if(search || roles){
-         url = `?${search ? 'search=' + search : ''}${search ? '&' : ''}${roles ? 'roles=' + roles : ''}`;
-      }
+      const uOffset = `${offset ? 'offset=' + offset : ''}${ search ? '&' : '' }`;
+      const uSearch = `${search ? 'search=' + search : ''}${ roles ? '&' : '' }`;
+      const uRoles  = `${roles ? 'roles=' + roles : ''}`;
+      url = '?' + uOffset + uSearch + uRoles;
       return this.http.get<any>(`${api.url}/user${url}`, { headers: this.headers });
     }
 
@@ -48,5 +53,9 @@ export class UserService {
 
     getMenu(id){
       return this.http.get(`${api.url}/user/menu/${id}`, { headers: this.headers });
+    }
+
+    updateById(id, data){
+      return this.http.put(`${api.url}/user/${id}`, data, { headers: this.headers });
     }
 }
