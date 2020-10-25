@@ -21,10 +21,12 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 import {MatButtonModule} from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { OrdersComponent } from './orders/orders.component';
+import { OrderComponent } from './orders/order/order.component';
 
 
 @NgModule({
-  declarations: [AdminComponent, UsersComponent, UserComponent],
+  declarations: [AdminComponent, UsersComponent, UserComponent, OrdersComponent, OrderComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
@@ -40,6 +42,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatChipsModule,
     NgxMaskModule.forRoot(),
     NgxPaginationModule,
+    MatAutocompleteModule,
     MatButtonModule,
     MatProgressSpinnerModule
   ]

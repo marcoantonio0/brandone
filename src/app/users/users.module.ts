@@ -7,6 +7,7 @@ import { RegisterComponent } from './register/register.component';
 import { BriefingComponent } from './briefing/briefing.component';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
 import { ObrigadoComponent } from './obrigado/obrigado.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
@@ -22,6 +23,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     FormsModule,
     CommonModule,
     UsersRoutingModule,
+    MatSnackBarModule
   ]
 })
 export class UsersModule { }

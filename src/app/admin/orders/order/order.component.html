@@ -1,0 +1,135 @@
+<div class="d-flex flex-row align-items-center flex-wrap justify-content-between mb-2">
+  <div class="d-flex flex-row align-items-center">
+    <button mat-icon-button [routerLink]="['/admin/orders']">
+      <mat-icon>navigate_before</mat-icon>
+    </button>
+    <h1 class="content-title ml-2 m-0">Detalhes do projeto</h1>
+  </div>
+  <div class="d-flex flex-column align-items-end">
+    <p class="mb-0">ID do Projeto: {{order?.id}}</p>
+    <p class="mb-0">Projeto iniciado em: <b>{{order?.createdAt | date: 'dd/MM/yyyy'}}</b></p>
+    <p>Prazo: <b>{{order?.deadline | date:'dd/MM/yyyy' }}</b></p>
+  </div>
+</div>
+
+<div class="card">
+  <!-- <div class="card-header d-flex flex-row justify-content-between" >
+
+  </div> -->
+
+  <div class="card-body p-0">
+    <div class="row m-0 p-3">
+      <div class="col-8">
+        <h2>{{order.title}}</h2>
+        <form [formGroup]="orderForm">
+          <p>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Categorias</mat-label>
+              <mat-select formControlName="category"  multiple>
+
+                <mat-select-trigger>
+                  <mat-chip-list>
+                    <mat-chip *ngFor="let category of orderForm.value.category"
+                       (removed)="categoryRemove(category)">
+                      {{ category }}
+                      <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                  </mat-chip-list>
+                </mat-select-trigger>
+
+                <mat-option *ngFor="let category of categories" [value]="category.description">{{category.description}}</mat-option>
+
+              </mat-select>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Arquivos</mat-label>
+              <mat-select formControlName="archive"  multiple>
+
+                <mat-select-trigger>
+                  <mat-chip-list>
+                    <mat-chip *ngFor="let archive of orderForm.value.archive"
+                       (removed)="archiveRemove(archive)">
+                      {{ archive }}
+                      <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                  </mat-chip-list>
+                </mat-select-trigger>
+
+                <mat-option *ngFor="let archive of archives" [value]="archive.type">{{archive.type}}</mat-option>
+
+              </mat-select>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Linguagens de programação</mat-label>
+              <mat-select formControlName="language"  multiple>
+
+                <mat-select-trigger>
+                  <mat-chip-list>
+                    <mat-chip *ngFor="let language of orderForm.value.language"
+                       (removed)="languageRemove(language)">
+                      {{ language }}
+                      <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                  </mat-chip-list>
+                </mat-select-trigger>
+
+                <mat-option *ngFor="let language of languages" [value]="language.type">{{language.type}}</mat-option>
+
+              </mat-select>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Descrição</mat-label>
+              <textarea matInput placeholder="Placeholder" rows="5" formControlName="description"></textarea>
+            </mat-form-field>
+          </p>
+        </form>
+      </div>
+      <div class="col-4">
+
+        <div class="infos-box mb-2">
+          <div class="info-box-header">
+            <h4 class="mb-0">Projeto</h4>
+          </div>
+          <div class="info-box-body">
+            <span>ID do Projeto: {{order?.id}}</span>
+            <span>Projeto iniciado em: <b>{{order?.createdAt | date: 'dd/MM/yyyy'}}</b></span>
+            <span>Prazo: <b>{{order?.deadline | date:'dd/MM/yyyy' }}</b></span>
+            <span>Preço Total: <b>{{order?.price | currency:"BRL":"symbol-narrow" }}</b></span>
+          </div>
+        </div>
+
+        <div class="infos-box mb-2">
+          <div class="info-box-header">
+            <h4 class="mb-0">Cliente</h4>
+          </div>
+          <div class="info-box-body">
+            <span><b>Nome:</b> {{customer?.name}}</span>
+            <span><b>CPF/CNPJ:</b> {{customer?.cpfcnpj}} </span>
+            <span *ngIf="customer?.razao_social"><b>Razão Social:</b> {{customer?.razao_social}}</span>
+            <span><b>Celular/Telefone:</b> {{customer?.phone}}</span>
+          </div>
+        </div>
+
+        <div class="infos-box mb-2">
+          <div class="info-box-header">
+            <h4 class="mb-0">Freelancer</h4>
+          </div>
+          <div class="info-box-body">
+            <span><b>Nome:</b> </span>
+            <span><b>CPF/CNPJ:</b> </span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <hr>
+    <h2>Informações de pagamento</h2>
+  </div>
+
+</div>

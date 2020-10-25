@@ -1,3 +1,4 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
@@ -13,13 +14,19 @@ export class LoginComponent implements OnInit {
     username: new FormControl('', Validators.required),
     password: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
+  private returnUrl;
   constructor(
     private sAuth: AuthenticationService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private snackbar: MatSnackBar
   ) {
-    if(this.sAuth.currentUser){
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    if(this.sAuth.currentUserValue){
       this.router.navigate(['/']);
+    }
+    if(this.route.snapshot.queryParams['session'] === 'true'){
+      this.snackbar.open('Sua sessão foi encerrada, faça login novamente.', 'OK', { duration: 2000 });
     }
   }
 
@@ -31,11 +38,7 @@ export class LoginComponent implements OnInit {
       this.sAuth.login(value.username, value.password).subscribe(
         r => {
         alert('Logado com sucesso!');
-        if (this.route.snapshot.queryParams.returnUrl){
-          this.router.navigate(['/'+this.route.snapshot.queryParams.returnUrl]);
-        } else {
-          this.router.navigate(['/']);
-        }
+        this.router.navigateByUrl(this.returnUrl);
       }, e => {
         alert(e);
       });

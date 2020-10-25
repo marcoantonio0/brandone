@@ -21,6 +21,10 @@ export class OrderService {
     return this.http.post<any>(`${api.url}/order`, data, { headers: this.headers });
   }
 
+  getAll(){
+    return this.http.get<any>(`${api.url}/order`, { headers: this.headers });
+  }
+
   getOrderUser(id, offset?: any, search?: string){
     const Offset = `${offset ? 'offset=' + offset : ''}${ search ? '&' : ''}`;
     const Search = `${search ? 'search=' + search : ''}`;
@@ -32,5 +36,12 @@ export class OrderService {
     return this.http.get<any>(`${api.url}/order/${id}`, { headers: this.headers });
   }
 
+  getAllLanguage(){
+    return this.http.get<any>(`${api.url}/order/language`, { headers: this.headers });
+  }
+
+  getAllArchives(){
+    return this.http.get<any>(`${api.url}/order/archive`, { headers: this.headers });
+  }
 
 }

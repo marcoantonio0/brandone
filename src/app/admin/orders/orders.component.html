@@ -1,0 +1,51 @@
+<h1 class="content-title">Lista de projetos</h1>
+
+            <div class="card">
+                <div class="card-header d-flex flex-row justify-content-between" >
+
+                </div>
+                <div class="card-body p-0">
+                    <table class="table w-100">
+                        <thead>
+                            <th></th>
+                            <th>Status</th>
+                            <th>Nome</th>
+                            <th>Prazo</th>
+                            <th>Categorias</th>
+                            <th>Freelancer</th>
+                        </thead>
+                        <tbody>
+                            <tr  *ngFor="let order of orders">
+                                <td></td>
+                                <td>
+                                  <mat-chip-list >
+                                    <mat-chip *ngFor="let category of order.category" [ngStyle]="{'background-color': this.getColorStatus(getLastStatus(order.status)?.idstatus)}">{{ getLastStatus(order.status)?.status }}</mat-chip>
+                                  </mat-chip-list>
+                                </td>
+                                <td>{{order?.title}}</td>
+                                <td>{{order?.deadline | date: 'dd/MM/yyyy'}}</td>
+                                <td>
+                                  <mat-chip-list >
+                                    <mat-chip *ngFor="let category of order.category"> {{ category.description }}</mat-chip>
+                                  </mat-chip-list>
+                                </td>
+                                <td>
+                                  {{order.user?.name}}
+                                </td>
+                                <td>
+                                  <div class="action-buttons">
+                                      <button class="act-button blue"  [routerLink]="['/admin/orders/'+order._id]">
+                                          <mat-icon class="mat-18">visibility</mat-icon>
+                                      </button>
+                                  </div>
+                              </td>
+                            </tr>
+                            <!-- <tr>
+                              <td align="center" colspan="6" *ngIf="users.length <= 0">
+                                Nada foi encontrado!
+                              </td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
