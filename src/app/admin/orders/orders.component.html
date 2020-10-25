@@ -19,7 +19,7 @@
                                 <td></td>
                                 <td>
                                   <mat-chip-list >
-                                    <mat-chip *ngFor="let category of order.category" [ngStyle]="{'background-color': this.getColorStatus(getLastStatus(order.status)?.idstatus)}">{{ getLastStatus(order.status)?.status }}</mat-chip>
+                                    <mat-chip  [ngStyle]="{'background-color': this.getColorStatus(getLastStatus(order.status)?.idstatus)}">{{ getLastStatus(order.status)?.status }}</mat-chip>
                                   </mat-chip-list>
                                 </td>
                                 <td>{{order?.title}}</td>
@@ -30,7 +30,7 @@
                                   </mat-chip-list>
                                 </td>
                                 <td>
-                                  {{order.user?.name}}
+                                  {{order.user?.name ? order.user?.name : '-'}}
                                 </td>
                                 <td>
                                   <div class="action-buttons">

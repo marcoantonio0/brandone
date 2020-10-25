@@ -9,127 +9,216 @@
     <p class="mb-0">ID do Projeto: {{order?.id}}</p>
     <p class="mb-0">Projeto iniciado em: <b>{{order?.createdAt | date: 'dd/MM/yyyy'}}</b></p>
     <p>Prazo: <b>{{order?.deadline | date:'dd/MM/yyyy' }}</b></p>
+    <p><b>Status</b>: <mat-chip [ngStyle]="{'background-color': getColorStatus(getLastStatus().idstatus)}">{{getLastStatus().description}}</mat-chip></p>
   </div>
 </div>
 
 <div class="card">
-  <!-- <div class="card-header d-flex flex-row justify-content-between" >
+  <mat-tab-group animationDuration="0ms">
+    <mat-tab label="Detalhes">
+      <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+      <div class="card-body p-0">
+        <div class="row m-0 p-3">
+          <div class="col-8">
 
-  </div> -->
+            <form [formGroup]="orderForm" (ngSubmit)="OnSubmit()">
+              <div class="d-flex flex-row align-items-center w-100 mb-3">
+                <h2 *ngIf="editTitle == false" class="mb-0">{{orderForm.value.title}}</h2>
+                <div class="form-group mb-0 w-100" *ngIf="editTitle == true">
+                  <input type="text" class="form-control" formControlName="title">
+                </div>
+                <button mat-icon-button (click)="editTitle ? editTitle = false : editTitle = true" color="primary" class="ml-2">
+                    <mat-icon class="mat-18">
+                      {{editTitle ? 'cancel' : 'edit' }}
+                    </mat-icon>
+                </button>
+              </div>
+              <p>
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Categorias</mat-label>
+                  <mat-select formControlName="category"  multiple>
 
-  <div class="card-body p-0">
-    <div class="row m-0 p-3">
-      <div class="col-8">
-        <h2>{{order.title}}</h2>
-        <form [formGroup]="orderForm">
-          <p>
-            <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Categorias</mat-label>
-              <mat-select formControlName="category"  multiple>
+                    <mat-select-trigger>
+                      <mat-chip-list>
+                        <mat-chip *ngFor="let category of orderForm.value.category"
+                           (removed)="categoryRemove(category)">
+                          {{ category }}
+                          <mat-icon matChipRemove>cancel</mat-icon>
+                        </mat-chip>
+                      </mat-chip-list>
+                    </mat-select-trigger>
 
-                <mat-select-trigger>
-                  <mat-chip-list>
-                    <mat-chip *ngFor="let category of orderForm.value.category"
-                       (removed)="categoryRemove(category)">
-                      {{ category }}
-                      <mat-icon matChipRemove>cancel</mat-icon>
-                    </mat-chip>
-                  </mat-chip-list>
-                </mat-select-trigger>
+                    <mat-option *ngFor="let category of categories" [value]="category.description">{{category.description}}</mat-option>
 
-                <mat-option *ngFor="let category of categories" [value]="category.description">{{category.description}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Arquivos</mat-label>
+                  <mat-select formControlName="archive"  multiple>
 
-              </mat-select>
-            </mat-form-field>
-          </p>
-          <p>
-            <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Arquivos</mat-label>
-              <mat-select formControlName="archive"  multiple>
+                    <mat-select-trigger>
+                      <mat-chip-list>
+                        <mat-chip *ngFor="let archive of orderForm.value?.archive"
+                           (removed)="archiveRemove(archive)">
+                          {{ archive }}
+                          <mat-icon matChipRemove>cancel</mat-icon>
+                        </mat-chip>
+                      </mat-chip-list>
+                    </mat-select-trigger>
 
-                <mat-select-trigger>
-                  <mat-chip-list>
-                    <mat-chip *ngFor="let archive of orderForm.value.archive"
-                       (removed)="archiveRemove(archive)">
-                      {{ archive }}
-                      <mat-icon matChipRemove>cancel</mat-icon>
-                    </mat-chip>
-                  </mat-chip-list>
-                </mat-select-trigger>
+                    <mat-option *ngFor="let archive of archives" [value]="archive?.type">{{archive?.type}}</mat-option>
 
-                <mat-option *ngFor="let archive of archives" [value]="archive.type">{{archive.type}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Linguagens de programação</mat-label>
+                  <mat-select formControlName="language"  multiple>
 
-              </mat-select>
-            </mat-form-field>
-          </p>
-          <p>
-            <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Linguagens de programação</mat-label>
-              <mat-select formControlName="language"  multiple>
+                    <mat-select-trigger>
+                      <mat-chip-list>
+                        <mat-chip *ngFor="let language of orderForm.value?.language"
+                           (removed)="languageRemove(language)">
+                          {{ language }}
+                          <mat-icon matChipRemove>cancel</mat-icon>
+                        </mat-chip>
+                      </mat-chip-list>
+                    </mat-select-trigger>
 
-                <mat-select-trigger>
-                  <mat-chip-list>
-                    <mat-chip *ngFor="let language of orderForm.value.language"
-                       (removed)="languageRemove(language)">
-                      {{ language }}
-                      <mat-icon matChipRemove>cancel</mat-icon>
-                    </mat-chip>
-                  </mat-chip-list>
-                </mat-select-trigger>
+                    <mat-option *ngFor="let language of languages" [value]="language?.type">{{language?.type}}</mat-option>
 
-                <mat-option *ngFor="let language of languages" [value]="language.type">{{language.type}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Descrição</mat-label>
+                  <textarea matInput placeholder="Placeholder" rows="5" formControlName="description"></textarea>
+                </mat-form-field>
+              </p>
 
-              </mat-select>
-            </mat-form-field>
-          </p>
-          <p>
-            <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Descrição</mat-label>
-              <textarea matInput placeholder="Placeholder" rows="5" formControlName="description"></textarea>
-            </mat-form-field>
-          </p>
-        </form>
+              <p>
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Freelancer</mat-label>
+                  <mat-select formControlName="freelancer" >
+                    <mat-select-trigger>
+                      {{ getSelectedFreelancer()?.name }} <mat-chip color="primary">{{getSelectedFreelancer()?.category_user.type}}</mat-chip> <span class="price-hour">({{getSelectedFreelancer()?.hour_price | currency:'BRL':'symbol'}}p/h)</span>
+                    </mat-select-trigger>
+                    <mat-option *ngFor="let freelancer of freelancers" [value]="freelancer?.name">{{freelancer.name}}  <mat-chip color="primary">{{freelancer?.category_user?.type}}</mat-chip> ({{freelancer?.hour_price | currency:'BRL':'symbol'}}p/h)</mat-option>
+
+                  </mat-select>
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Valor</mat-label>
+                  <input matInput formControlName="price" class="text-right"   currencyMask>
+
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Status</mat-label>
+                  <mat-select formControlName="status" multiple>
+                    <mat-select-trigger>
+                      <mat-chip-list>
+                        <mat-chip *ngFor="let stats of orderForm.value?.status"
+                           (removed)="statusRemove(stats)">
+                          {{ stats }}
+                          <mat-icon matChipRemove>cancel</mat-icon>
+                        </mat-chip>
+                      </mat-chip-list>
+                    </mat-select-trigger>
+                    <mat-option *ngFor="let stats of status" [value]="stats?.description">{{stats.description}}  </mat-option>
+
+                  </mat-select>
+                </mat-form-field>
+              </p>
+             <div class="d-flex flex-row align-items-center">
+              <button class="mr-2" mat-raised-button type="submit" color="primary" [disabled]="isLoading">
+                <div class="d-flex flex-row align-items-center">
+                  <mat-spinner  diameter="20" *ngIf="isLoading" class="mr-2"></mat-spinner>
+                  {{ isLoading ? 'Salvando' : 'Salvar' }}
+                </div>
+              </button>
+              <button mat-stroked-button type="button" (click)="cancel()">Cancelar</button>
+             </div>
+            </form>
+          </div>
+          <div class="col-4">
+           <div class="my-3">
+
+           </div>
+
+           <div class="infos-box info mb-2" *ngIf="order.status?.length == 1 && order.status[0]?.idstatus == 1 && order.user?.length <= 0">
+            <div class="info-box-header">
+              <h4 class="mb-0">Pendente de orçamento</h4>
+            </div>
+            <div class="info-box-body">
+              <p>Este projeto ainda tem orçamento definido. Clique no botão abaixo para selecionar o freelancer e definir valores.</p>
+              <button mat-raised-button (click)="openBudget()">
+                  Definir orçamento
+              </button>
+            </div>
+          </div>
+
+            <div class="infos-box mb-2">
+              <div class="info-box-header">
+                <h4 class="mb-0">Projeto</h4>
+              </div>
+              <div class="info-box-body">
+                <span>ID do Projeto: {{order?.id}}</span>
+                <span>Projeto iniciado em: <b>{{order?.createdAt | date: 'dd/MM/yyyy'}}</b></span>
+                <span>Prazo: <b>{{order?.deadline | date:'dd/MM/yyyy' }}</b></span>
+                <span>Preço Total: <b>{{order?.price | currency:"BRL":"symbol-narrow" }}</b></span>
+              </div>
+            </div>
+
+            <div class="infos-box mb-2">
+              <div class="info-box-header">
+                <h4 class="mb-0">Cliente</h4>
+              </div>
+              <div class="info-box-body">
+                <span><b>Nome:</b> {{customer?.name}}</span>
+                <span><b>CPF/CNPJ:</b> {{customer?.cpfcnpj | mask:'000.000.000-00||00.000.000/0000-00'}} </span>
+                <span *ngIf="customer?.razao_social"><b>Razão Social:</b> {{customer?.razao_social}}</span>
+                <span><b>E-mail:</b> {{customer.email}}</span>
+                <span><b>Celular/Telefone:</b> {{customer?.phone | mask:'(00) 0 0000-000||(00) 0000-000'}}</span>
+              </div>
+            </div>
+
+            <div class="infos-box mb-2" *ngIf="user">
+              <div class="info-box-header">
+                <h4 class="mb-0">Freelancer</h4>
+              </div>
+              <div class="info-box-body">
+                <span><b>Nome:</b> {{user?.name}}</span>
+                <span><b>CPF/CNPJ:</b> {{user?.cpfcnpj | mask:'000.000.000-00||00.000.000/0000-00' }}</span>
+                <span><b>Celular/Telefone:</b> {{user?.phone  | mask:'(00) 0 0000-000||(00) 0000-000'}}</span>
+                <span><b>E-mail:</b> {{user?.email}}</span>
+                <span><b>Preço(p/h):</b> {{user?.hour_price | currency:'BRL':'symbol'}}</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
       </div>
-      <div class="col-4">
+    </mat-tab>
 
-        <div class="infos-box mb-2">
-          <div class="info-box-header">
-            <h4 class="mb-0">Projeto</h4>
-          </div>
-          <div class="info-box-body">
-            <span>ID do Projeto: {{order?.id}}</span>
-            <span>Projeto iniciado em: <b>{{order?.createdAt | date: 'dd/MM/yyyy'}}</b></span>
-            <span>Prazo: <b>{{order?.deadline | date:'dd/MM/yyyy' }}</b></span>
-            <span>Preço Total: <b>{{order?.price | currency:"BRL":"symbol-narrow" }}</b></span>
-          </div>
-        </div>
+    <mat-tab label="Atendimento">
+      Atendimento
+    </mat-tab>
 
-        <div class="infos-box mb-2">
-          <div class="info-box-header">
-            <h4 class="mb-0">Cliente</h4>
-          </div>
-          <div class="info-box-body">
-            <span><b>Nome:</b> {{customer?.name}}</span>
-            <span><b>CPF/CNPJ:</b> {{customer?.cpfcnpj}} </span>
-            <span *ngIf="customer?.razao_social"><b>Razão Social:</b> {{customer?.razao_social}}</span>
-            <span><b>Celular/Telefone:</b> {{customer?.phone}}</span>
-          </div>
-        </div>
+    <mat-tab label="Informações de pagamento">
+      Informações de pagamento
+    </mat-tab>
 
-        <div class="infos-box mb-2">
-          <div class="info-box-header">
-            <h4 class="mb-0">Freelancer</h4>
-          </div>
-          <div class="info-box-body">
-            <span><b>Nome:</b> </span>
-            <span><b>CPF/CNPJ:</b> </span>
-          </div>
-        </div>
-      </div>
+  </mat-tab-group>
 
-    </div>
-    <hr>
-    <h2>Informações de pagamento</h2>
-  </div>
+
 
 </div>

@@ -10,12 +10,12 @@ export class OrdersComponent implements OnInit {
   public orders;
   constructor(
     private sOrder: OrderService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.sOrder.getAll().subscribe(r => {
       this.orders = r;
-    })
+    });
   }
 
   getLastStatus(array: any[]){

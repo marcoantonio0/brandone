@@ -44,7 +44,7 @@ export class UserService {
     }
 
     getById(id) {
-      return this.http.get<UserModel>(`${api.url}/user/${id}`, { headers: this.headers  });
+      return this.http.get<UserModel>(`${api.url}/user/id/${id}`, { headers: this.headers  });
     }
 
     register(data){
@@ -58,4 +58,9 @@ export class UserService {
     updateById(id, data){
       return this.http.put(`${api.url}/user/${id}`, data, { headers: this.headers });
     }
+
+    getAllUsers(){
+      return this.http.get(`${api.url}/user/freelancer`, { headers: this.headers });
+    }
+
 }

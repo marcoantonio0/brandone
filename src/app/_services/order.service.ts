@@ -44,4 +44,25 @@ export class OrderService {
     return this.http.get<any>(`${api.url}/order/archive`, { headers: this.headers });
   }
 
+  update(id: string, data: any){
+    return this.http.put<any>(`${api.url}/order/${id}`, data, { headers: this.headers });
+  }
+
+  getAllStatus() {
+    return this.http.get<any>(`${api.url}/order/status`, { headers: this.headers });
+  }
+
+  getOrderPrice(idorder, iduser, commission){
+    return this.http.get<any>(`${api.url}/order/price/${idorder}?id=${iduser}&commission=${commission}`, { headers: this.headers })
+  }
+
+  setBudget(idorder, userid, data){
+    const json = {
+      user: userid,
+      price: data.price,
+      price_nocommission: data.price_nocommission,
+      price_gain: data.price_gain
+    }
+    return this.http.put<any>(`${api.url}/order/budget/${idorder}`, json, { headers: this.headers });
+  }
 }

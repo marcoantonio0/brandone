@@ -23,10 +23,28 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { OrdersComponent } from './orders/orders.component';
 import { OrderComponent } from './orders/order/order.component';
+import { CurrencyMaskInputMode, NgxCurrencyModule } from 'ngx-currency';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { BudgetDialogComponent } from './dialogs/budget/budgetdialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
+export const customCurrencyMaskConfig = {
+  align: "right",
+  allowNegative: true,
+  allowZero: true,
+  decimal: ",",
+  precision: 2,
+  prefix: "R$ ",
+  suffix: "",
+  thousands: ".",
+  nullable: true,
+  min: null,
+  max: null,
+  inputMode: CurrencyMaskInputMode.FINANCIAL
+};
 
 @NgModule({
-  declarations: [AdminComponent, UsersComponent, UserComponent, OrdersComponent, OrderComponent],
+  declarations: [AdminComponent, UsersComponent, UserComponent, OrdersComponent, OrderComponent, BudgetDialogComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
@@ -44,7 +62,10 @@ import { OrderComponent } from './orders/order/order.component';
     NgxPaginationModule,
     MatAutocompleteModule,
     MatButtonModule,
-    MatProgressSpinnerModule
+    MatProgressBarModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    NgxCurrencyModule.forRoot(customCurrencyMaskConfig)
   ]
 })
 export class AdminModule { }
