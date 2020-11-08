@@ -1,3 +1,4 @@
+import { NotificationComponent } from './notification/notification.component';
 import { OrdersComponent } from './orders/orders.component';
 import { UsersComponent } from './users/users.component';
 import { NgModule } from '@angular/core';
@@ -17,6 +18,9 @@ const routes: Routes = [
   { path: 'orders', children: [
     { path: '', component: OrdersComponent },
     { path: ':id', component: OrderComponent }
+  ] },
+  { path: 'notification', children: [
+    { path: '', component: NotificationComponent }
   ] }
 ];
 

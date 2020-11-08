@@ -1,0 +1,24 @@
+<h1 class="content-title">Novos projetos</h1>
+
+<div class="card">
+    <div class="card-header d-flex flex-row justify-content-between" >
+
+    </div>
+    <div class="card-body">
+      <ul class="list-orders">
+        <li *ngFor="let auction of auctions" [routerLink]="['/auction/'+auction._id]">
+          <h3 class="mb-0">{{auction.title}}</h3>
+          <span class="description">{{auction.description}}</span>
+          <ul class="category-list" >
+            <li *ngFor="let category of auction.category">{{category.description}}</li>
+          </ul>
+          <span class="prazo-float">
+            Disponível em até
+            <span>
+              {{auction.auction_deadline | date: 'dd/MM/yyyy'}}
+            </span>
+          </span>
+        </li>
+      </ul>
+    </div>
+</div>

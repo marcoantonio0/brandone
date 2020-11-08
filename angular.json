@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "brandone"
+  "defaultProject": "brandone",
+  "cli": {
+    "analytics": "433c771e-b60f-4ea6-ae0e-8c7016a37376"
+  }
 }

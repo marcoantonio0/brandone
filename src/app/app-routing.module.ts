@@ -1,3 +1,4 @@
+import { AuctionModule } from './auction/auction.module';
 import { ContentComponent } from './content/content.component';
 import { ErrorComponent } from './error/error.component';
 import { IndexComponent } from './index/index.component';
@@ -25,11 +26,26 @@ const routes: Routes = [
         path: 'order',
         loadChildren: () => import('./order/order.module').then(m => m.OrderModule)
       },
+      {
+        path: 'auction',
+        loadChildren: () => import('./auction/auction.module').then(m => m.AuctionModule)
+      },
+      { path: 'user',
+      loadChildren: () => import('./user/user.module').then(m => m.UserModule)
+      },
     ]
   },
   {
-    path: 'user',
-    loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then(m => m.RegisterModule)
+  },
+  {
+    path: 'checkout',
+    loadChildren: () => import('./checkout/checkout.module').then(m => m.CheckoutModule)
   },
   {
     path: '**',

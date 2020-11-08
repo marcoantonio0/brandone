@@ -6,8 +6,8 @@
     <h1 class="content-title ml-2 m-0">Detalhes do projeto</h1>
   </div>
   <div class="d-flex flex-column align-items-end">
-    <p class="mb-0"><b>ID do Projeto</b>: {{order.id}}</p>
-    <p><b>Projeto iniciado em</b>: {{order.createdAt | date: 'dd/MM/yyyy'}}</p>
+    <p class="mb-0"><b>ID do Projeto</b>: {{order?.id}}</p>
+    <p><b>Projeto iniciado em</b>: {{order?.createdAt | date: 'dd/MM/yyyy'}}</p>
   </div>
 </div>
 
@@ -21,9 +21,9 @@
         <div class="mb-2">
           <div class="d-flex flex-row align-items-center justify-content-between mb-3">
             <h2 class="mb-0">
-              {{order.title}}
+              {{order?.title}}
             </h2>
-            <span class="status-float ml-3">Prazo: {{order.deadline | date:'dd/MM/yyyy' }}</span>
+            <span class="status-float ml-3">Prazo: {{order?.deadline | date:'dd/MM/yyyy' }}</span>
           </div>
            <div class="mb-3">
             <mat-chip-list
@@ -31,14 +31,14 @@
             cdkDropListOrientation="horizontal">
             <mat-chip
               cdkDrag
-              *ngFor="let category of order.category">
+              *ngFor="let category of order?.category">
               {{category.description}}
             </mat-chip>
           </mat-chip-list>
            </div>
           <span style="font-size: 18px;" class="mb-3 d-block">Descrição</span>
           <p style="font-size: 14px;" class="mb-3">
-            {{order.description}}
+            {{order?.description}}
           </p>
         </div>
         <div class="mb-5">
@@ -73,68 +73,28 @@
         <small style="color: #6e6e6e">Converse com o lancer abaixo. Ajude-nós a entender melhor seu projeto.</small>
       </div>
       <div class="chat-container">
-        <div class="chat-wrapper">
+        <div class="chat-wrapper" #chatWrapper>
 
-          <div class="chat-baloon-wrapper right">
-            <span class="chat-name">Nome</span>
+          <div class="chat-baloon-wrapper "  *ngFor="let message of messages" [ngClass]="{'right': message.id == sAuth.currentUserValue.id, 'left': message.id != sAuth.currentUserValue.id }">
+            <span class="chat-name">{{message.name}}</span>
             <div class="chat-baloon">
-              <span class="chat-text">Texto aaaaaaaaaa</span>
-              <span class="chat-time">10/08/2020 18:12</span>
-            </div>
-          </div>
-
-          <div class="chat-baloon-wrapper left">
-            <span class="chat-name">Nome</span>
-            <div class="chat-baloon">
-              <span class="chat-text">Texto aaaaaaaaaa</span>
-              <span class="chat-time">10/08/2020 18:12</span>
-            </div>
-          </div>
-
-          <div class="chat-baloon-wrapper right">
-            <span class="chat-name">Nome</span>
-            <div class="chat-baloon">
-              <span class="chat-text">Texto aaaaaaaaaa</span>
-              <span class="chat-time">10/08/2020 18:12</span>
-            </div>
-          </div>
-
-          <div class="chat-baloon-wrapper left">
-            <span class="chat-name">Nome</span>
-            <div class="chat-baloon">
-              <span class="chat-text">Texto aaaaaaaaaa</span>
-              <span class="chat-time">10/08/2020 18:12</span>
-            </div>
-          </div>
-
-          <div class="chat-baloon-wrapper right">
-            <span class="chat-name">Nome</span>
-            <div class="chat-baloon">
-              <span class="chat-text">Texto aaaaaaaaaa</span>
-              <span class="chat-time">10/08/2020 18:12</span>
-            </div>
-          </div>
-
-          <div class="chat-baloon-wrapper left">
-            <span class="chat-name">Nome</span>
-            <div class="chat-baloon">
-              <span class="chat-text">Texto aaaaaaaaaa</span>
-              <span class="chat-time">10/08/2020 18:12</span>
+              <span class="chat-text">{{message.message}}</span>
+              <span class="chat-time">{{message.time  | date: 'dd/MM/yyyy HH:mm' }}</span>
             </div>
           </div>
 
         </div>
-        <div class="chat-inputs">
+        <span *ngIf="isTyping">{{dataTyping.name}} está digitando...</span>
+        <form [formGroup]="chatForm" class="chat-inputs">
           <div class="chat-input">
-            <input type="text" placeholder="Digite aqui">
+            <input type="text" placeholder="Digite aqui" formControlName="text" (keypress)="sendTyping()">
             <div class="mx-2">
-              <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+              <button mat-icon-button aria-label="Example icon button with a vertical three dot icon" (click)="sendMessage()">
                 <mat-icon>send</mat-icon>
               </button>
             </div>
           </div>
-
-        </div>
+        </form>
       </div>
     </div>
     <hr>

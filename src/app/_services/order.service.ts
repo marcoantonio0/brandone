@@ -33,7 +33,7 @@ export class OrderService {
   }
 
   getOrderById(id){
-    return this.http.get<any>(`${api.url}/order/${id}`, { headers: this.headers });
+    return this.http.get<any>(`${api.url}/order/id/${id}`, { headers: this.headers });
   }
 
   getAllLanguage(){
@@ -65,4 +65,21 @@ export class OrderService {
     }
     return this.http.put<any>(`${api.url}/order/budget/${idorder}`, json, { headers: this.headers });
   }
+
+  getAllAuctions(){
+    return this.http.get<any>(`${api.url}/order/auction`, { headers: this.headers });
+  }
+
+  getAuction(id: string){
+    return this.http.get<any>(`${api.url}/order/auction/${id}`, { headers: this.headers });
+  }
+
+  setBidToAuction(id: string, body){
+    return this.http.post<any>(`${api.url}/order/bids/${id}`, body, { headers: this.headers });
+  }
+
+  getBidsByOrderId(id: string){
+    return this.http.get<any>(`${api.url}/order/bids/${id}`, { headers: this.headers });
+  }
+
 }

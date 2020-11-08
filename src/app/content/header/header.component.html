@@ -1,6 +1,42 @@
 <header>
   <nav class="nav">
       <div class="d-flex flex-row aling-items-center w-100 justify-content-end p-2">
+          <div class="notification" [ngClass]="{'show': notificationShow}">
+            <button mat-icon-button color="primary" class="mr-2" (click)="openNotification()">
+              <mat-icon [matBadge]="newNotificationCounter == 0 ? '' : newNotificationCounter" matBadgeColor="warn" matBadgeSize="small">home</mat-icon>
+            </button>
+
+            <div class="notification-float">
+              <div class="notification-header">
+                <h3>Notificações</h3>
+                <button class="notification-close" (click)="openNotification()">
+                  <mat-icon>
+                    close
+                  </mat-icon>
+                </button>
+              </div>
+              <div class="notification-wrapper">
+                <ul class="notification-list">
+
+                  <li class="notification-item" *ngFor="let notification of notifications" [routerLink]="notification.link">
+                    <div class="notification">
+                      <div class="ntf-icon">
+
+                      </div>
+                      <div class="ntf-wrapper">
+                        <span class="ntf-title">{{ notification.title }}</span>
+                        <p class="ntf-description">
+                          {{ notification.description }}
+                        </p>
+                      </div>
+                    </div>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+            <div class="notification-overlay"  (click)="openNotification()"></div>
+          </div>
           <button class="user-profile"  [matMenuTriggerFor]="menu">
               <picture>
                   <img src="https://static.vakinha.com.br/uploads/vakinha/image/425429/ff.gif?ims=700x410" alt="">

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { WebsocketService } from '../_services/websocket.service';
 
 @Component({
   selector: 'app-index',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private sWebSocket: WebsocketService
+  ) { }
 
   ngOnInit(): void {
+
   }
 
 }

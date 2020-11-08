@@ -1,0 +1,81 @@
+<div class="d-inline-flex flex-row align-items-center mb-3" [routerLink]="['/auction']" style="cursor: pointer;">
+  <button mat-icon-button >
+      <mat-icon class="mat-18">navigate_before</mat-icon>
+  </button>
+  <span class="ml-2">Voltar</span>
+</div>
+
+<div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-8">
+          <h2>{{auction?.title}}</h2>
+          <p>
+            {{auction?.description}}
+          </p>
+          <hr>
+          <h2 class="mb-0">Aplicar para o projeto</h2>
+          <p class="info">Insira abaixo informações de como irá realizar este projeto e o valor que irá cobrar pelo mesmo.</p>
+
+          <form [formGroup]="auctionForm" (ngSubmit)="submitBid()">
+            <p>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Valor</mat-label>
+                <input matInput formControlName="price" currencyMask >
+              </mat-form-field>
+            </p>
+            <p>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Descrição</mat-label>
+                <textarea matInput formControlName="description" rows="5"></textarea>
+                <mat-hint> {{auctionForm.get('description').value.length}}/250</mat-hint>
+              </mat-form-field>
+            </p>
+            <div class="text-right">
+              <button mat-stroked-button type="button"  class="mr-2 "(click)="clearForm()">
+                Cancelar
+              </button>
+              <button mat-raised-button type="submit" color="primary" class="ml-auto " [disabled]="isLoading">
+                <div class="d-flex flex-row align-items-center">
+                  <mat-spinner  diameter="20" *ngIf="isLoading" class="mr-2"></mat-spinner>
+                {{ isLoading ? 'Enviando...' : 'Enviar' }}
+                </div>
+              </button>
+
+            </div>
+          </form>
+
+        </div>
+        <div class="col-4 border-left-solid">
+          <h4>Categorias</h4>
+          <mat-chip-list >
+            <mat-chip *ngFor="let category of auction.category">{{ category.description }}</mat-chip>
+          </mat-chip-list>
+          <hr>
+          <h4>Arquivos</h4>
+          <mat-chip-list >
+            <mat-chip *ngFor="let archive of auction.archive">{{ archive.type }}</mat-chip>
+          </mat-chip-list>
+        </div>
+      </div>
+      <hr>
+     <div classs="d-flex flex-row align-items-center mb-2">
+      <h1 class="mr-2 mb-0 d-inline-block">
+        Aplicações neste projeto
+      </h1>
+      <span class="total">{{ bids?.length > 1  ? bids?.length+' aplicações' : bids?.length+ ' aplicação'}}</span>
+     </div>
+      <ul class="list-application">
+        <li *ngFor="let bid of bids">
+          <div class="user-info">
+            <img [src]="bid.user?.picture" [alt]="bid.user?.name">
+            <span>{{ bid.user?.name }}</span>
+          </div>
+          <div class="info-application">
+            <span class="price">{{ bid.price | currency:'BRL':'symbol' }}</span>
+            <span class="time">{{ bid.dateApplicated | date:'dd/MM/yyyy' }}</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+</div>

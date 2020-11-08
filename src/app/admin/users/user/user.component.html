@@ -83,7 +83,7 @@
                       <mat-slide-toggle [checked]="hasPermission(menu._id)" (click)="setMenu(menu._id)"></mat-slide-toggle>
                     </mat-panel-title>
                   </mat-expansion-panel-header>
-                  <div *ngFor="let submenu of menu.submenu" class="d-flex flex-row align-items-center w-100 justify-content-between">
+                  <div *ngFor="let submenu of menu.submenu" class="d-flex flex-row align-items-center w-100 justify-content-between box">
                     {{submenu.description}}
                       <mat-slide-toggle [checked]="hasPermission(submenu._id, 'sub')"  (click)="setSubMenu(submenu._id)"></mat-slide-toggle>
                   </div>

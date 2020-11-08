@@ -12,6 +12,133 @@
   color: #fff;
 }
 
+.notification {
+  position: relative;
+  &.show {
+    .notification-float {
+      visibility: visible;
+    }
+    .notification-overlay{
+      visibility: visible;
+    }
+  }
+  .notification-float {
+    position: absolute;
+    overflow: hidden;
+    top: 45px;
+    right: 0;
+    height: 350px;
+    width: 300px;
+    border-radius: 5px;
+    background-color: #18191a;
+    border: 1px solid #3A3C3D;
+    z-index: 2;
+    visibility: hidden;
+  }
+  .notification-header {
+    border-bottom: 1px solid #3A3C3D;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    h3 {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 0;
+      color: #fff;
+    }
+    .notification-close {
+      height: 30px;
+      width: 30px;
+      display: flex;
+      background-color: transparent;
+      border: none;
+      color: #666;
+      justify-content: center;
+      align-items: center;
+      border-radius: 5px;
+      outline: none;
+
+      &:hover {
+        background-color: #3a3c3d91;
+
+      }
+      &:active {
+        transition: all ease-in-out 250ms;
+        transform: scale(.8);
+      }
+    }
+
+  }
+  .notification-list {
+    overflow-x: hidden;
+    overflow-y: auto;
+    list-style: none;
+    margin: 0;
+    max-height: 300px;
+    padding: 0;
+
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background: #888;
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+    li {
+      cursor: pointer;
+      &:hover {
+        background-color: #3a3c3d81;
+      }
+      border-bottom: 1px solid #3A3C3D;
+      color: #fff;
+      .notification {
+        padding: 10px 5px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        .ntf-icon {
+          height: 35px;
+          width: 35px;
+          margin-right: 10px;
+          background-color: #242526;
+          border-radius: 50%;
+        }
+        .ntf-title {
+          font-size: 14px;
+          font-weight: 500;
+        }
+        .ntf-description {
+          font-size: 14px;
+          margin: 0 !important;
+        }
+      }
+    }
+  }
+  .notification-overlay {
+    height: 100vh;
+    width: 100vw;
+    z-index: 1;
+    visibility: hidden;
+    top: 0;
+    left: 0;
+    position: fixed;
+    background-color: transparent;
+  }
+}
+
 .mat-expansion-panel-header{
   &.mat-expanded:before {
     transform: rotateZ(180deg);

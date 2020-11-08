@@ -27,7 +27,7 @@
                 <div class="form-group mb-0 w-100" *ngIf="editTitle == true">
                   <input type="text" class="form-control" formControlName="title">
                 </div>
-                <button mat-icon-button (click)="editTitle ? editTitle = false : editTitle = true" color="primary" class="ml-2">
+                <button mat-icon-button (click)="editTitle ? editTitle = false : editTitle = true" color="primary" type="button" class="ml-2">
                     <mat-icon class="mat-18">
                       {{editTitle ? 'cancel' : 'edit' }}
                     </mat-icon>

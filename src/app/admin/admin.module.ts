@@ -27,6 +27,7 @@ import { CurrencyMaskInputMode, NgxCurrencyModule } from 'ngx-currency';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { BudgetDialogComponent } from './dialogs/budget/budgetdialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { NotificationComponent } from './notification/notification.component';
 
 export const customCurrencyMaskConfig = {
   align: "right",
@@ -44,7 +45,7 @@ export const customCurrencyMaskConfig = {
 };
 
 @NgModule({
-  declarations: [AdminComponent, UsersComponent, UserComponent, OrdersComponent, OrderComponent, BudgetDialogComponent],
+  declarations: [AdminComponent, UsersComponent, UserComponent, OrdersComponent, OrderComponent, BudgetDialogComponent, NotificationComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
