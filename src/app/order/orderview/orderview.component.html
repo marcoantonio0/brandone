@@ -71,27 +71,73 @@
       <div class="mb-2">
         <h1 class="mb-0">Suporte</h1>
         <small style="color: #6e6e6e">Converse com o lancer abaixo. Ajude-nós a entender melhor seu projeto.</small>
+        <div class="profile-support">
+          <div class="picture">
+            <picture>
+              <img [src]="order.user.picture" alt="">
+            </picture>
+            <span class="online-status" [ngClass]="{'active': order.user.online == true}"></span>
+          </div>
+          <span>
+            {{ order.user.name }}
+          </span>
+        </div>
       </div>
       <div class="chat-container">
-        <div class="chat-wrapper" #chatWrapper>
+        <div class="chat-static">
+          <div class="chat-wrapper" #chatWrapper>
 
-          <div class="chat-baloon-wrapper "  *ngFor="let message of messages" [ngClass]="{'right': message.id == sAuth.currentUserValue.id, 'left': message.id != sAuth.currentUserValue.id }">
-            <span class="chat-name">{{message.name}}</span>
-            <div class="chat-baloon">
-              <span class="chat-text">{{message.message}}</span>
-              <span class="chat-time">{{message.time  | date: 'dd/MM/yyyy HH:mm' }}</span>
+            <div class="chat-baloon-wrapper "  *ngFor="let message of messages" [ngClass]="{'right': message.id == sAuth.currentUserValue.id, 'left': message.id != sAuth.currentUserValue.id }">
+              <span class="chat-name">{{message.name}}</span>
+              <div class="chat-baloon">
+                <span class="chat-text">{{message.message}}</span>
+                <span class="chat-time">{{message.time  | date: 'dd/MM/yyyy HH:mm' }}</span>
+              </div>
             </div>
-          </div>
 
+
+          </div>
+          <span *ngIf="isTyping" class="chat-typing">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: none; display: block; shape-rendering: auto;" width="35px" height="25px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+            <circle cx="84" cy="50" r="10" fill="#656565">
+                <animate attributeName="r" repeatCount="indefinite" dur="0.40983606557377045s" calcMode="spline" keyTimes="0;1" values="10;0" keySplines="0 0.5 0.5 1" begin="0s"></animate>
+                <animate attributeName="fill" repeatCount="indefinite" dur="1.6393442622950818s" calcMode="discrete" keyTimes="0;0.25;0.5;0.75;1" values="#656565;#666666;#404040;#636363;#656565" begin="0s"></animate>
+            </circle><circle cx="16" cy="50" r="10" fill="#656565">
+              <animate attributeName="r" repeatCount="indefinite" dur="1.6393442622950818s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="0;0;10;10;10" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="0s"></animate>
+              <animate attributeName="cx" repeatCount="indefinite" dur="1.6393442622950818s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="16;16;16;50;84" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="0s"></animate>
+            </circle><circle cx="50" cy="50" r="10" fill="#656565">
+              <animate attributeName="r" repeatCount="indefinite" dur="1.6393442622950818s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="0;0;10;10;10" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.40983606557377045s"></animate>
+              <animate attributeName="cx" repeatCount="indefinite" dur="1.6393442622950818s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="16;16;16;50;84" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.40983606557377045s"></animate>
+            </circle><circle cx="84" cy="50" r="10" fill="#656565">
+              <animate attributeName="r" repeatCount="indefinite" dur="1.6393442622950818s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="0;0;10;10;10" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.8196721311475409s"></animate>
+              <animate attributeName="cx" repeatCount="indefinite" dur="1.6393442622950818s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="16;16;16;50;84" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.8196721311475409s"></animate>
+            </circle><circle cx="16" cy="50" r="10" fill="#656565">
+              <animate attributeName="r" repeatCount="indefinite" dur="1.6393442622950818s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="0;0;10;10;10" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-1.2295081967213113s"></animate>
+              <animate attributeName="cx" repeatCount="indefinite" dur="1.6393442622950818s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="16;16;16;50;84" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-1.2295081967213113s"></animate>
+            </circle>
+            </svg>
+            {{dataTyping.name}} está digitando...
+          </span>
         </div>
-        <span *ngIf="isTyping">{{dataTyping.name}} está digitando...</span>
+
+
         <form [formGroup]="chatForm" class="chat-inputs">
           <div class="chat-input">
             <input type="text" placeholder="Digite aqui" formControlName="text" (keypress)="sendTyping()">
-            <div class="mx-2">
+            <div class="mx-2 d-flex flex-row align-items-center">
               <button mat-icon-button aria-label="Example icon button with a vertical three dot icon" (click)="sendMessage()">
                 <mat-icon>send</mat-icon>
               </button>
+              <div class="emoji-picker" [ngClass]="{'show': emojiPicker}">
+                <button mat-icon-button type="button" (click)="openEmojiPicker()">
+                  <mat-icon>sentiment_satisfied_alt</mat-icon>
+                </button>
+                <div class="emoji-float">
+                  <emoji-mart title="Pick your emoji…" emoji="point_up" (emojiClick)="addEmoji($event)"></emoji-mart>
+                </div>
+                <div class="emoji-overlay" (click)="openEmojiPicker()"></div>
+              </div>
+
             </div>
           </div>
         </form>

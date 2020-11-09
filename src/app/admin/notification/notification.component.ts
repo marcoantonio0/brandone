@@ -12,7 +12,7 @@ export class NotificationComponent implements OnInit {
     title: new FormControl(''),
     description: new FormControl(''),
     icon: new FormControl(''),
-    type: new FormControl(),
+    room: new FormControl(),
     link: new FormControl('')
   })
   constructor(
@@ -23,12 +23,14 @@ export class NotificationComponent implements OnInit {
   }
 
   sendEvent(){
+    const date = new Date();
     this.sWebSocket.emit('global', {
       title: this.notificationForm.value.title,
       description: this.notificationForm.value.description,
-      icon: this.notificationForm.value.icon,
-      type: 'glboal',
-      link: this.notificationForm.value.link
+      icon: 'autorenew',
+      room: 'global',
+      link: this.notificationForm.value.link,
+      time: date.toISOString()
     });
   }
 

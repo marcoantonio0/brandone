@@ -1,5 +1,5 @@
 import { AuthenticationService } from './_services/authentication.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { WebsocketService } from './_services/websocket.service';
 
 @Component({
@@ -7,7 +7,7 @@ import { WebsocketService } from './_services/websocket.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'brandone';
   constructor(
     private sWebSocket: WebsocketService,
@@ -16,6 +16,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit(){
     this.sWebSocket.emit('join', this.sAuth.currentUserValue.id);
+  }
+
+  ngOnDestroy(){
+    this.sWebSocket.emit('leave', this.sAuth.currentUserValue.id);
   }
 
 }

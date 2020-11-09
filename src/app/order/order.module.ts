@@ -21,6 +21,7 @@ import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 import {MatButtonModule} from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatIconModule} from '@angular/material/icon';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 @NgModule({
   declarations: [OrderComponent, OrderviewComponent],
@@ -41,7 +42,8 @@ import {MatIconModule} from '@angular/material/icon';
     ReactiveFormsModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    MatIconModule
+    MatIconModule,
+    PickerModule
   ]
 })
 export class OrderModule { }

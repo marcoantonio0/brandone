@@ -19,6 +19,7 @@ export class OrderviewComponent implements OnInit, OnDestroy {
   public isTyping = false;
   public sendingType = false;
   public dataTyping: any;
+  public emojiPicker = false;
   public messages = [];
   public chatForm = new FormGroup({
     text: new FormControl('')
@@ -98,6 +99,18 @@ export class OrderviewComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
+  }
+
+  addEmoji(event){
+    this.chatForm.get('text').setValue((this.chatForm.get('text').value ? this.chatForm.get('text').value : '') + event.emoji.native);
+  }
+
+  openEmojiPicker(){
+    if(!this.emojiPicker){
+      this.emojiPicker = true;
+    } else {
+      this.emojiPicker = false;
+    }
   }
 
   scrollChat() {

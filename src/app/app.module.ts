@@ -29,6 +29,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { AuctionModule } from './auction/auction.module';
+import { FilterDatePipe } from './_pipes/filter-date.pipe';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { AuctionModule } from './auction/auction.module';
     ErrorComponent,
     IndexComponent,
     ContentComponent,
-    HeaderComponent
+    HeaderComponent,
+    FilterDatePipe
   ],
   imports: [
     MatMenuModule,
@@ -64,7 +66,8 @@ import { AuctionModule } from './auction/auction.module';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    FilterDatePipe
   ],
   bootstrap: [AppComponent]
 })

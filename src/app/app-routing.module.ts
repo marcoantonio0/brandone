@@ -47,6 +47,7 @@ const routes: Routes = [
     path: 'checkout',
     loadChildren: () => import('./checkout/checkout.module').then(m => m.CheckoutModule)
   },
+  { path: 'recover-password', loadChildren: () => import('./recover-password/recover-password.module').then(m => m.RecoverPasswordModule) },
   {
     path: '**',
     component: ErrorComponent

@@ -1,3 +1,6 @@
+@import '~@ctrl/ngx-emoji-mart/picker';
+
+
 .nav {
   position: fixed;
   top: 0;
@@ -161,7 +164,7 @@
   align-items: center;
   height: 100vh;
   .login-side {
-      flex-basis: 30%;
+      flex-basis: 65%;
       height: 100%;
       background-color: #333;
       .login-link {
@@ -184,7 +187,7 @@
       }
   }
   .login {
-      flex-basis: 70%;
+      flex-basis: 35%;
       height: 100%;
       display: flex;
       align-items: center;

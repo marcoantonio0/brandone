@@ -63,4 +63,15 @@ export class UserService {
       return this.http.get(`${api.url}/user/freelancer`, { headers: this.headers });
     }
 
+    recoverPassword(data): any{
+      return this.http.post(`${api.url}/user/password`, { username: data }, { headers: this.headers });
+    }
+
+    checkTokenPassword(token): any{
+      return this.http.get(`${api.url}/user/password/${token}`, { headers: this.headers });
+    }
+
+    changePassword(data: any): any{
+      return this.http.post(`${api.url}/user/password/change`, data, { headers: this.headers });
+    }
 }

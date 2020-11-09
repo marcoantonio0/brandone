@@ -17,6 +17,8 @@
   &.show {
     .notification-float {
       visibility: visible;
+      opacity: 1;
+      transition: all ease-in-out 80ms;
     }
     .notification-overlay{
       visibility: visible;
@@ -33,7 +35,9 @@
     background-color: #18191a;
     border: 1px solid #3A3C3D;
     z-index: 2;
+    opacity: 0;
     visibility: hidden;
+    transition: all ease-in-out 80ms;
   }
   .notification-header {
     border-bottom: 1px solid #3A3C3D;
@@ -112,16 +116,25 @@
         .ntf-icon {
           height: 35px;
           width: 35px;
+          min-width: 35px;
+          min-height: 35px;
           margin-right: 10px;
           background-color: #242526;
           border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
         .ntf-title {
           font-size: 14px;
           font-weight: 500;
         }
+        .ntf-time {
+          color: #666;
+        }
         .ntf-description {
           font-size: 14px;
+          color: #949494;
           margin: 0 !important;
         }
       }

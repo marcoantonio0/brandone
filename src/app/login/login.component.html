@@ -1,13 +1,5 @@
 <div class="login-wrapper">
-  <a class="login-side" href="as">
-      <div class="login-link">
-          <img src="" alt="">
-          <div class="side-info">
-              <h2>Massive</h2>
-              <span>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </span>
-          </div>
-      </div>
-  </a>
+
   <div class="login">
       <div class="login-box">
           <div class="mb-4">
@@ -26,11 +18,20 @@
                   <small class="text-danger" *ngIf="getError('password')">{{getError('password')}}</small>
               </div>
               <div  class="d-block text-right">
-                  <a href="#" class="forgot-password">Esqueceu a senha?</a>
+                  <a [routerLink]="['/recover-password']" class="forgot-password">Esqueceu a senha?</a>
               </div>
               <button class="btn btn-login my-3" type="submit">Entre</button>
           </form>
           <span>Não possui conta? <a [routerLink]="'/register'">Cadastre-se</a>.</span>
       </div>
   </div>
+  <a class="login-side" href="as">
+    <div class="login-link">
+        <img src="" alt="">
+        <div class="side-info">
+            <h2>Massive</h2>
+            <span>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </span>
+        </div>
+    </div>
+</a>
 </div>

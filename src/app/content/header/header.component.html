@@ -2,8 +2,8 @@
   <nav class="nav">
       <div class="d-flex flex-row aling-items-center w-100 justify-content-end p-2">
           <div class="notification" [ngClass]="{'show': notificationShow}">
-            <button mat-icon-button color="primary" class="mr-2" (click)="openNotification()">
-              <mat-icon [matBadge]="newNotificationCounter == 0 ? '' : newNotificationCounter" matBadgeColor="warn" matBadgeSize="small">home</mat-icon>
+            <button mat-icon-button  class="mr-2" (click)="openNotification()" style="color: #666;">
+              <mat-icon [matBadge]="newNotificationCounter == 0 ? '' : newNotificationCounter" matBadgeColor="warn" matBadgeSize="small">notifications</mat-icon>
             </button>
 
             <div class="notification-float">
@@ -18,16 +18,32 @@
               <div class="notification-wrapper">
                 <ul class="notification-list">
 
-                  <li class="notification-item" *ngFor="let notification of notifications" [routerLink]="notification.link">
+                  <li class="notification-item text-center" *ngIf="notificationsArray.length <= 0">
+                    <div class="py-2" style="height: 299px;
+                    display: flex;
+                    align-items: center;
+                    flex-direction: column;
+                    justify-content: center;">
+                      <h3 class="mb-0">Vazio</h3>
+                      <p class="mb-0">Não há nenhuma notificação no momento.</p>
+                    </div>
+                  </li>
+
+                  <li class="notification-item" *ngFor="let notification of notificationsArray " [routerLink]="notification.link">
                     <div class="notification">
                       <div class="ntf-icon">
-
+                        <mat-icon>
+                          {{ notification.icon }}
+                        </mat-icon>
                       </div>
                       <div class="ntf-wrapper">
                         <span class="ntf-title">{{ notification.title }}</span>
                         <p class="ntf-description">
                           {{ notification.description }}
                         </p>
+                        <small class="ntf-time">
+                          {{ notification.time | date: 'dd/MM/yyyy HH:mm' }}
+                        </small>
                       </div>
                     </div>
                   </li>
